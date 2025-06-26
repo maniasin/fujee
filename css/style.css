@@ -444,21 +444,9 @@ ul {
 }
 
 .service-callout p {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     font-weight: 700;
     margin: 0;
-    text-align: center;
-    word-break: keep-all;       /* 단어 단위 줄바꿈 */
-    white-space: normal;        /* 줄바꿈 허용 */
-    line-height: 1.5;
-}
-
-@media (max-width: 768px) {
-    .service-callout p {
-        font-size: 1rem;        /* 글자 크기 축소 */
-        line-height: 1.4;       /* 줄 간격 조절 */
-        padding: 0 10px;        /* 좌우 여백 확보 */
-    }
 }
 
 .service-callout a {
@@ -924,8 +912,16 @@ ul {
     }
 
     .service-callout p {
-        font-size: 1.4rem;
+        font-size: 0.9rem; /* 폰트 크기를 더 작게 조정 */
+		text-align: center; /* 텍스트를 중앙 정렬 */
+		word-break: keep-all; /* 단어 단위로 줄바꿈 유지 */
     }
+
+	.service-callout {
+		padding: 25px 20px; /* 좌우 패딩을 늘려 여백 확보 */
+		max-width: 95%; /* 섹션 최대 너비 지정 */
+		margin: auto; /* 섹션을 중앙 정렬 */
+	}
 
     .footer-content {
         flex-direction: column;
