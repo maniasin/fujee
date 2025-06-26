@@ -444,9 +444,21 @@ ul {
 }
 
 .service-callout p {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 700;
     margin: 0;
+    text-align: center;
+    word-break: keep-all;       /* 단어 단위 줄바꿈 */
+    white-space: normal;        /* 줄바꿈 허용 */
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .service-callout p {
+        font-size: 1rem;        /* 글자 크기 축소 */
+        line-height: 1.4;       /* 줄 간격 조절 */
+        padding: 0 10px;        /* 좌우 여백 확보 */
+    }
 }
 
 .service-callout a {
