@@ -869,43 +869,30 @@ ul {
 }
 
 @media (max-width: 768px) {
-    /* 1. Hero title이 짤리는 점 해결 */
-    .hero-title {
-        font-size: 2.2rem; /* 기존 2.8rem에서 더 줄임 */
-        white-space: normal; /* 줄바꿈 허용 */
-        word-break: keep-all; /* 단어 단위로 줄바꿈 */
-        padding: 0 10px; /* 좌우 여백 추가 */
-    }
-
-    .hero-subtitle {
-        font-size: 0.9rem; /* 부제목도 조금 더 줄임 */
-    }
-
-    .hero-description {
-        font-size: 0.85rem; /* 설명도 조금 더 줄임 */
-    }
-
-    /* 섹션 타이틀 공통 조정 (중고제품 갤러리 타이틀 포함) */
+    /* 기존 모바일 반응형 스타일 유지 */
     .section-title {
-        font-size: 1.8rem; /* 기존 2.2rem에서 더 줄여서 잘림 방지 */
+        font-size: 2.2rem;
     }
 
     .section-subtitle {
-        font-size: 1rem; /* 부제도 더 줄임 */
+        font-size: 1.1rem;
     }
 
-    .common-section {
-        padding: 60px 20px; /* 섹션 상하 패딩 유지 및 좌우 패딩 확보 */
+    .hero-section {
+        padding: 100px 0;
+        height: 60vh;
     }
 
-    /* 2. 긴급 AS 상담이 짤리는 점 해결 */
-    .service-callout p {
-        font-size: 1.1rem; /* 기존 1.4rem에서 더 줄임 */
-        line-height: 1.4; /* 줄 간격 조절 */
+    .hero-title {
+        font-size: 2.8rem;
     }
 
-    .service-callout {
-        padding: 30px; /* 패딩 조정 */
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
     }
 
     .product-card {
@@ -924,6 +911,10 @@ ul {
         font-size: 1.5rem;
     }
 
+    .service-callout p {
+        font-size: 1.4rem;
+    }
+
     .footer-content {
         flex-direction: column;
         text-align: center;
@@ -937,66 +928,660 @@ ul {
         gap: 10px;
     }
 
-    /* Chatbot Styles */
-    .chatbot-container {
-        bottom: 15px;
-        right: 15px;
+    /* Common Modal Styles */
+    .modal-common {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 2000; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+        justify-content: center;
+        align-items: center;
+        opacity: 0; /* For fade-in effect */
+        visibility: hidden; /* For fade-in effect */
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
 
-    .chatbot-toggle-btn {
-        width: 50px;
-        height: 50px;
-        font-size: 1.6rem;
+    .modal-common.active {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
     }
 
-    .chatbot-window {
-        width: calc(100vw - 30px); /* 화면 너비에 맞춤 */
-        height: 450px;
-        bottom: 70px; /* 토글 버튼과의 간격 조정 */
-        right: 15px;
+    /* Default modal-content for 1단계 모달 (Product Category Modal) */
+    .modal-common .modal-content {
+        position: relative;
+        background-color: var(--white-color);
+        margin: auto; /* 중앙 정렬 */
+        padding: 30px; /* 기존 패딩 복원 */
+        border-radius: var(--border-radius);
+        max-width: 90%; /* 화면의 90% 너비 */
+        max-height: 90vh; /* 화면 높이의 90% */
+        overflow-y: auto;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        animation: zoomIn 0.3s ease-out;
+        display: flex;
+        flex-direction: column;
+
+        /* Custom Scrollbar for modal content */
+        &::-webkit-scrollbar {
+            width: 8px; /* 스크롤바의 폭 */
+            height: 8px; /* 가로 스크롤바의 높이 */
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--light-gray); /* 트랙 배경색 */
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--primary-color); /* 스크롤 막대 색상 */
+            border-radius: 10px; /* 스크롤 막대 둥글게 */
+            border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color); /* 호버 시 색상 변경 */
+        }
     }
 
-    .chatbot-header {
-        padding: 12px;
-        font-size: 1rem;
+    @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
     }
 
-    .chatbot-header .chatbot-close-btn {
-        font-size: 1.5rem;
+    .modal-common .close-btn {
+        color: var(--text-color);
+        font-size: 35px;
+        font-weight: bold;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+        transition: color 0.2s;
+        z-index: 10; /* 갤러리 위에 보이도록 */
     }
 
-    .chatbot-messages {
+    .modal-common .close-btn:hover,
+    .modal-common .close-btn:focus {
+        color: var(--primary-color);
+    }
+
+    /* Product Category Modal (1단계) Specific Styles (변경 없음 - .modal-common .modal-content에 의해 제어) */
+    .product-category-modal .category-modal-title {
+        font-size: 2.2rem;
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .category-product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
         padding: 10px;
     }
 
+    .category-product-card {
+        background-color: var(--light-gray);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .category-product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .category-product-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: var(--border-radius);
+        margin-bottom: 15px;
+    }
+
+    .category-product-card h4 {
+        font-size: 1.6rem;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+    }
+
+    .category-product-card p {
+        font-size: 1rem;
+        color: var(--light-text-color);
+        line-height: 1.5;
+        flex-grow: 1;
+    }
+
+    /* Image Gallery Modal (2단계) Specific Styles - 화면 꽉 채우기 */
+    .image-gallery-modal .modal-content {
+        margin: 20px; /* 화면 가장자리에서 20px 여백 유지 */
+        width: calc(100vw - 40px); /* 뷰포트 너비에서 40px (20px * 2) 제외 */
+        height: calc(100vh - 40px); /* 뷰포트 높이에서 40px (20px * 2) 제외 */
+        max-width: none; /* 상위 .modal-common .modal-content의 max-width 무시 */
+        max-height: none; /* 상위 .modal-common .modal-content의 max-height 무시 */
+        padding: 15px; /* 내부 패딩 */
+        overflow-y: scroll; /* 변경: 항상 스크롤바 표시 */
+
+        /* Custom Scrollbar for modal content (2단계 모달) */
+        &::-webkit-scrollbar {
+            width: 8px; /* 스크롤바의 폭 */
+            height: 8px; /* 가로 스크롤바의 높이 */
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--light-gray); /* 트랙 배경색 */
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--primary-color); /* 스크롤 막대 색상 */
+            border-radius: 10px; /* 스크롤 막대 둥글게 */
+            border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color); /* 호버 시 색상 변경 */
+        }
+    }
+
+    .image-gallery-modal .gallery-title {
+        font-size: 2.2rem;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Masonry.js를 위한 그리드 컨테이너 스타일 */
+    .modal-gallery-grid {
+        margin: 0 auto;
+        width: 100%; /* 모달 콘텐츠 내에서 가로 전체 사용 */
+        padding: 5px; /* 모달 그리드 자체 패딩 */
+        position: relative; /* Masonry.js 컨테이너는 position: relative여야 함 */
+        flex-grow: 1; /* 남은 공간을 채우도록 */
+        /* Custom Scrollbar for Masonry Grid */
+        &::-webkit-scrollbar {
+            width: 8px; /* 스크롤바의 폭 */
+            height: 8px; /* 가로 스크롤바의 높이 */
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--light-gray); /* 트랙 배경색 */
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--primary-color); /* 스크롤 막대 색상 */
+            border-radius: 10px; /* 스크롤 막대 둥글게 */
+            border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color); /* 호버 시 색상 변경 */
+        }
+    }
+
+    /* Masonry.js 아이템 스타일 */
+    .modal-gallery-grid .grid-item-modal {
+        /* 데스크톱: 2열 그리드 */
+        width: calc(50% - 10px); /* 2열 (간격 10px 고려) */
+        margin-bottom: 10px; /* 아이템 간 하단 여백 */
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        background-color: var(--light-gray); /* 배경색 추가 */
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        cursor: pointer;
+        display: block; /* 이미지 하단 공백 제거 및 flex item으로 동작 */
+        border: 1px solid transparent; /* 스크롤바 깜빡임 방지를 위한 투명 테두리 추가 */
+    }
+
+    .modal-gallery-grid .grid-item-modal:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 */
+    }
+
+    .modal-gallery-grid .grid-item-modal img {
+        display: block;
+        width: 100%;
+        height: auto; /* Masonry가 높이를 자동으로 조절하므로 auto로 설정 */
+        object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 */
+        border-radius: var(--border-radius); /* 이미지 자체에도 둥근 모서리 적용 */
+    }
+
+    /* 기존 단일 이미지 갤러리 관련 스타일 제거 (Masonry로 대체) */
+    .gallery-image-container,
+    #galleryImage,
+    .gallery-nav-btn,
+    .prev-btn,
+    .next-btn,
+    .image-caption {
+        display: none !important; /* Masonry 적용으로 인해 더 이상 사용되지 않음 */
+    }
+
+
+    /* Responsive adjustments for modals */
+    @media (max-width: 992px) {
+        /* 1단계 모달에만 적용될 미디어 쿼리 */
+        .product-category-modal .modal-content {
+            max-width: 95%; /* 태블릿에서 1단계 모달 너비 조정 */
+            max-height: 95vh; /* 태블릿에서 1단계 모달 높이 조정 */
+        }
+        /* 2단계 모달에만 적용될 미디어 쿼리 */
+        .image-gallery-modal .modal-content {
+            margin: 15px; /* 태블릿에서 2단계 모달 여백 조정 */
+            width: calc(100vw - 30px);
+            height: calc(100vh - 30px);
+            padding: 10px;
+        }
+        .modal-gallery-grid .grid-item-modal {
+            /* 태블릿: 1열 그리드 */
+            width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    @media (max-width: 768px) {
+        /* 1단계 모달에만 적용될 미디어 쿼리 */
+        .product-category-modal .modal-content {
+            max-width: 98%; /* 모바일에서 1단계 모달 너비 조정 */
+            max-height: 98vh; /* 모바일에서 1단계 모달 높이 조정 */
+            padding: 15px;
+        }
+        /* 2단계 모달에만 적용될 미디어 쿼리 */
+        .image-gallery-modal .modal-content {
+            margin: 10px; /* 모바일에서 2단계 모달 여백 조정 */
+            width: calc(100vw - 20px);
+            height: calc(100vh - 20px);
+            padding: 5px;
+        }
+        .modal-common .close-btn {
+            font-size: 30px;
+            top: 5px;
+            right: 10px;
+        }
+
+        .product-category-modal .category-modal-title,
+        .image-gallery-modal .gallery-title {
+            font-size: 1.8rem;
+        }
+
+        .category-product-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-gallery-grid .grid-item-modal {
+            /* 모바일: 1열 그리드 유지 */
+            width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+
+    /* Chatbot Styles */
+    .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
+        z-index: 2000;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .chatbot-toggle-btn {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        font-size: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    }
+
+    .chatbot-toggle-btn:hover {
+        transform: translateY(-5px) scale(1.05);
+        background-color: var(--secondary-color);
+    }
+
+    .chatbot-window {
+        background-color: var(--white-color);
+        border-radius: var(--border-radius);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        width: 350px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        position: absolute;
+        bottom: 80px; /* 토글 버튼 위로 */
+        right: 0;
+        transform: translateY(20px);
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        transform-origin: bottom right; /* 변형 원점 설정 */
+    }
+
+    .chatbot-window.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .chatbot-header {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        padding: 15px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chatbot-header .chatbot-close-btn {
+        background: none;
+        border: none;
+        color: var(--white-color);
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .chatbot-header .chatbot-close-btn:hover {
+        transform: rotate(90deg);
+    }
+
+    .chatbot-messages {
+        flex-grow: 1;
+        padding: 15px;
+        overflow-y: auto;
+        background-color: var(--light-gray);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        /* Custom Scrollbar for chatbot messages */
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    }
+
     .message {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+        max-width: 80%;
+        padding: 10px 15px;
+        border-radius: 18px;
+        line-height: 1.4;
+        word-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-message {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        align-self: flex-end; /* 오른쪽 정렬 */
+        border-bottom-right-radius: 2px; /* 꼬리처럼 보이게 */
+    }
+
+    .bot-message {
+        background-color: var(--white-color);
+        color: var(--text-color);
+        align-self: flex-start; /* 왼쪽 정렬 */
+        border: 1px solid var(--border-color);
+        border-bottom-left-radius: 2px; /* 꼬리처럼 보이게 */
+    }
+
+    .bot-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 5px; /* 메시지 아래 여백 */
+        align-self: flex-start;
+        background: none; /* 배경 제거 */
+        border: none; /* 테두리 제거 */
+        box-shadow: none; /* 그림자 제거 */
+        padding: 0; /* 패딩 제거 */
+        max-width: 100%; /* 너비 최대로 */
     }
 
     .quick-reply-btn {
-        padding: 6px 10px;
-        font-size: 0.8rem;
+        background-color: var(--secondary-color);
+        color: var(--white-color);
+        border: none;
+        border-radius: 20px;
+        padding: 8px 15px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
     }
 
+    .quick-reply-btn:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-2px);
+    }
+
+
     .chatbot-input-area {
-        padding: 8px;
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid var(--border-color);
+        background-color: var(--white-color);
     }
 
     .chatbot-input-area input[type="text"] {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+        flex-grow: 1;
+        padding: 10px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 1rem;
+        margin-right: 10px;
+        font-family: 'Noto Sans KR', sans-serif;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .chatbot-input-area input[type="text"]:focus {
+        border-color: var(--primary-color);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
     }
 
     .chatbot-input-area button {
-        width: 36px;
-        height: 36px;
-        font-size: 1rem;
+        background-color: var(--accent-color);
+        color: var(--white-color);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    /* 4. 위로가기 버튼하고 챗봇 버튼이 겹치는 점 해결 */
-    .scroll-to-top {
-        bottom: calc(15px + 50px + 15px); /* 챗봇 토글 버튼(50px) 위에 15px 여백을 두고 배치 */
-        right: 15px; /* 챗봇과 동일한 오른쪽 여백 */
+    .chatbot-input-area button:hover {
+        background-color: #218838; /* 더 진한 강조 색 */
+        transform: scale(1.05);
+    }
+
+    /* Chatbot Responsive Design */
+    @media (max-width: 768px) {
+        /* Chatbot Container, Toggle, Window */
+        .chatbot-container {
+            bottom: 15px;
+            right: 15px;
+        }
+
+        .chatbot-toggle-btn {
+            width: 50px;
+            height: 50px;
+            font-size: 1.6rem;
+        }
+
+        .chatbot-window {
+            width: calc(100vw - 30px); /* 화면 너비에 맞춤 */
+            height: 450px;
+            bottom: 70px; /* 토글 버튼과의 간격 조정 */
+            right: 15px;
+        }
+
+        /* Chatbot Header */
+        .chatbot-header {
+            padding: 12px;
+            font-size: 1rem;
+        }
+
+        .chatbot-header .chatbot-close-btn {
+            font-size: 1.5rem;
+        }
+
+        /* Chatbot Messages */
+        .chatbot-messages {
+            padding: 10px;
+        }
+
+        .message {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+
+        .quick-reply-btn {
+            padding: 6px 10px;
+            font-size: 0.8rem;
+        }
+
+        /* Chatbot Input Area */
+        .chatbot-input-area {
+            padding: 8px;
+        }
+
+        .chatbot-input-area input[type="text"] {
+            padding: 8px 12px;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-input-area button {
+            width: 36px;
+            height: 36px;
+            font-size: 1rem;
+        }
+
+        /* Mobile specific adjustments for elements previously identified as issues */
+        /* 1. Hero title이 짤리는 점 해결 */
+        .hero-title {
+            font-size: 2.0rem; /* 기존 2.8rem에서 더 줄임 */
+            white-space: normal; /* 줄바꿈 허용 */
+            word-break: keep-all; /* 단어 단위로 줄바꿈 */
+            padding: 0 10px; /* 좌우 여백 추가 */
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem; /* 부제목도 조금 더 줄임 */
+        }
+
+        .hero-description {
+            font-size: 0.85rem; /* 설명도 조금 더 줄임 */
+        }
+
+        /* 섹션 타이틀 공통 조정 (중고제품 갤러리 타이틀 포함) */
+        .section-title {
+            font-size: 1.6rem; /* 기존 2.2rem에서 더 줄여서 잘림 방지 */
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem; /* 부제도 더 줄임 */
+        }
+
+        .common-section {
+            padding: 60px 20px; /* 섹션 상하 패딩 유지 및 좌우 패딩 확보 */
+        }
+
+        /* 2. 긴급 AS 상담이 짤리는 점 해결 */
+        .service-callout p {
+            font-size: 1.0rem; /* 기존 1.4rem에서 더 줄임 */
+            line-height: 1.4; /* 줄 간격 조절 */
+        }
+
+        .service-callout {
+            padding: 30px; /* 패딩 조정 */
+        }
+
+        /* 4. 위로가기 버튼하고 챗봇 버튼이 겹치는 점 해결 */
+        .scroll-to-top {
+            bottom: 85px; /* 챗봇 토글 버튼(50px) 위에 충분한 여백을 두고 배치 */
+            right: 15px; /* 챗봇과 동일한 오른쪽 여백 */
+        }
+
+        /* Modal Responsive Adjustments for Mobile */
+        /* 1단계 모달에만 적용될 미디어 쿼리 */
+        .product-category-modal .modal-content {
+            max-width: 98%; /* 모바일에서 1단계 모달 너비 조정 */
+            max-height: 98vh; /* 모바일에서 1단계 모달 높이 조정 */
+            padding: 15px;
+        }
+        /* 2단계 모달에만 적용될 미디어 쿼리 */
+        .image-gallery-modal .modal-content {
+            margin: 10px; /* 모바일에서 2단계 모달 여백 조정 */
+            width: calc(100vw - 20px);
+            height: calc(100vh - 20px);
+            padding: 5px;
+        }
+        .modal-common .close-btn {
+            font-size: 30px;
+            top: 5px;
+            right: 10px;
+        }
+
+        .product-category-modal .category-modal-title,
+        .image-gallery-modal .gallery-title {
+            font-size: 1.8rem;
+        }
+
+        .category-product-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-gallery-grid .grid-item-modal {
+            /* 모바일: 1열 그리드 유지 */
+            width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
+            margin-left: auto;
+            margin-right: auto;
+        }
     }
 }
