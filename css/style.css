@@ -1,0 +1,1500 @@
+/* Custom Properties (CSS Variables) */
+:root {
+    --primary-color: #0056b3; /* 진한 파랑 */
+    --secondary-color: #007bff; /* 기본 파랑 */
+    --accent-color: #28a745; /* 강조 녹색 */
+    --text-color: #333;
+    --light-text-color: #666;
+    --white-color: #fff;
+    --light-gray: #f8f9fa;
+    --border-color: #dee2e6;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    --transition-speed: 0.3s;
+    --border-radius: 8px;
+    --container-width: 1200px;
+}
+
+/* Modern CSS Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth; /* 부드러운 스크롤 */
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white-color);
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color var(--transition-speed), transform var(--transition-speed);
+}
+
+a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px); /* 호버 시 약간 위로 이동 */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* 이미지 하단 공백 제거 */
+}
+
+ul {
+    list-style: none;
+}
+
+/* Utility Classes */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    font-weight: 700;
+    text-align: center;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow);
+}
+
+.btn-secondary {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    transform: translateY(-3px);
+    box-shadow: var(--box-shadow);
+}
+
+.common-section {
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden; /* 애니메이션 경계 */
+}
+
+.common-section:nth-of-type(even) {
+    background-color: var(--light-gray);
+}
+
+.section-title {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-weight: 700;
+    position: relative;
+    display: inline-block; /* 밑줄 애니메이션을 위해 */
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 0; /* 초기 너비 0 */
+    height: 4px;
+    background-color: var(--accent-color);
+    transition: width 0.6s ease-out, left 0.6s ease-out; /* 애니메이션 추가 */
+    transform: translateX(-50%);
+}
+
+.section-subtitle {
+    font-size: 1.3rem;
+    color: var(--light-text-color);
+    margin-bottom: 50px;
+    font-weight: 300;
+}
+
+/* Header */
+.main-header {
+    background-color: rgba(255, 255, 255, 0.3); /* 투명도를 높여 글래스모피즘 효과 적용 */
+    padding: 20px 0; /* 패딩 조정 */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* 그림자 부드럽게 */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s ease-in-out; /* 전환 속도 조정 */
+    backdrop-filter: blur(10px); /* 글래스모피즘 효과 핵심 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 하단 경계선 추가 */
+    border-radius: 0 0 15px 15px; /* 하단 모서리 둥글게 */
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-header.scrolled {
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.6); /* 스크롤 시 투명도 조절 */
+    backdrop-filter: blur(10px); /* 블러 유지 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 유지 */
+    border-radius: 0 0 10px 10px; /* 스크롤 시 약간 더 작게 둥글게 */
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.logo a {
+    color: var(--primary-color);
+    text-decoration: none;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 로고에 미세한 그림자 추가 */
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: var(--text-color);
+    font-weight: 500; /* 폰트 두께 약간 조절 */
+    padding: 8px 0; /* 패딩 조정 */
+    position: relative;
+    transition: color var(--transition-speed); /* 색상 전환 추가 */
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0px; /* 밑줄 위치 조정 */
+    width: 0;
+    height: 3px; /* 밑줄 두께 조정 */
+    background-color: var(--accent-color);
+    transition: width 0.3s ease-out;
+    border-radius: 2px; /* 둥근 밑줄 */
+}
+
+.main-nav a:hover {
+    color: var(--primary-color); /* 호버 시 색상 변경 */
+}
+
+.main-nav a:hover::after {
+    width: 100%;
+}
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero-section {
+    /* background: url('images/hero_background.jpg') no-repeat center center/cover; <-- 기존 이미지 배경 제거 */
+    color: var(--white-color);
+    padding: 150px 0;
+    text-align: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh; /* 뷰포트 높이의 70% */
+    overflow: hidden; /* 비디오가 섹션을 벗어나지 않도록 */
+}
+
+/* 비디오 배경 스타일 */
+.hero-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0; /* 내용 및 오버레이 뒤에 배치 */
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+    filter: brightness(0.8); /* 비디오를 약간 어둡게 하여 텍스트 가독성 높임 */
+}
+
+
+.hero-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 기존 오버레이 색상을 좀 더 연하게 */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    opacity: 0; /* 초기 숨김 */
+    transform: translateY(20px); /* 초기 아래로 이동 */
+    animation: fadeInSlideUp 1s ease-out forwards;
+}
+
+@keyframes fadeInSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    /* 타이핑 애니메이션을 위한 스타일 */
+    white-space: nowrap; /* 텍스트가 줄 바꿈되지 않도록 */
+    overflow: hidden; /* 초기에는 텍스트 숨김 */
+    border-right: .15em solid orange; /* 캐럿 효과 */
+    animation: none; /* 초기 애니메이션 충돌 방지를 위해 제거. JS에서 추가 */
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* About Section */
+.about-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    text-align: left;
+    margin-top: 50px;
+}
+
+.about-text {
+    flex: 2;
+    padding-right: 20px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.about-text p {
+    margin-bottom: 20px;
+}
+
+.about-image {
+    flex: 1;
+    min-width: 300px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.about-image img {
+    border-radius: var(--border-radius);
+    transition: transform 0.6s ease-in-out;
+}
+
+.about-image img:hover {
+    transform: scale(1.05); /* 이미지 확대 효과 */
+}
+
+/* Products Section (메인 제품 그리드는 원본 스타일 유지) */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.product-card {
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex; /* 내부 요소 정렬을 위해 flex 추가 */
+    flex-direction: column; /* 세로 정렬 */
+    justify-content: space-between; /* 버튼을 하단으로 */
+    cursor: pointer; /* 클릭 가능한 요소임을 표시 */
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 400px; /* 원본 높이 유지 */
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+
+.product-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.product-card p {
+    color: var(--light-text-color);
+    margin-bottom: 20px;
+    line-height: 1.7;
+    flex-grow: 1; /* 설명 텍스트가 공간을 채우도록 */
+}
+
+/* Services Section */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-item {
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+    text-align: center;
+}
+
+.service-item:hover {
+    transform: translateY(-8px);
+    background-color: var(--light-gray);
+}
+
+.service-icon {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    animation: bounceIn 1s ease-out; /* 아이콘 등장 애니메이션 */
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+
+.service-item h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.service-item p {
+    color: var(--light-text-color);
+}
+
+.service-callout {
+    margin-top: 60px;
+    padding: 40px;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.service-callout p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.service-callout a {
+    color: var(--white-color);
+    border: 2px solid var(--white-color);
+    padding: 12px 25px;
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.service-callout a:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+}
+
+/* Used Section */
+.used-content-wrapper {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+    text-align: left;
+    flex-wrap: wrap; /* 반응형을 위해 줄바꿈 허용 */
+}
+
+.used-process, .used-products {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.used-process h3, .used-products h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.used-process ul {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.used-process ul li {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--light-text-color);
+}
+
+.used-process ul li .fa-check-circle {
+    color: var(--accent-color);
+    font-size: 1.3rem;
+}
+
+.used-product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.used-product-item {
+    text-align: center;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer; /* 중고 제품 아이템도 클릭 가능하도록 */
+}
+
+.used-product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.used-product-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+}
+
+.used-product-item p {
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.used-product-item .price {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+
+/* Contact Section */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    margin-top: 50px;
+    text-align: left;
+}
+
+.contact-info {
+    background-color: var(--light-gray);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.contact-info h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.contact-info p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--light-text-color);
+}
+
+.contact-info i {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.social-links a {
+    font-size: 1.8rem;
+    color: var(--light-text-color);
+    transition: color var(--transition-speed);
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+.contact-form-wrapper {
+    background-color: var(--white-color);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.contact-form-wrapper h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.contact-form input[type="text"]:focus,
+.contact-form input[type="email"]:focus,
+.contact-form input[type="tel"]:focus,
+.contact-form textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.contact-form textarea {
+    resize: vertical; /* 세로 크기 조절 가능 */
+}
+
+.contact-form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.map-container {
+    margin-top: 50px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+/* Kakao Map Container Style */
+#kakao-map {
+    width: 100%; /* 너비는 부모 컨테이너에 맞춤 */
+    height: 450px; /* 지도의 높이 설정 */
+    border-radius: var(--border-radius);
+}
+
+
+/* Footer */
+.main-footer {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 40px 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.footer-info p {
+    margin-bottom: 5px;
+    line-height: 1.6;
+}
+
+.footer-links ul {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--white-color);
+    opacity: 0.8;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    transform: none; /* 푸터 링크는 transform 제거 */
+}
+
+.copyright {
+    opacity: 0.7;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent-color);
+    color: var(--white-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--box-shadow);
+    opacity: 0; /* 초기 숨김 */
+    visibility: hidden;
+    transition: opacity var(--transition-speed), visibility var(--transition-speed), transform var(--transition-speed);
+    z-index: 999;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-5px);
+}
+
+/* Keyframes for animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Intersection Observer Animations */
+.section-title.animate::after {
+    width: 100%;
+}
+
+.common-section.animate .about-image img,
+.common-section.animate .product-card,
+.common-section.animate .service-item,
+.common-section.animate .used-process,
+.common-section.animate .used-products,
+.common-section.animate .contact-info,
+.common-section.animate .contact-form-wrapper {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0; /* 애니메이션 시작 전 숨김 */
+}
+
+/* Stagger animation for grid items */
+.common-section.animate .product-card:nth-child(1),
+.common-section.animate .service-item:nth-child(1),
+.common-section.animate .used-product-item:nth-child(1) { animation-delay: 0.1s; }
+.common-section.animate .product-card:nth-child(2),
+.common-section.animate .service-item:nth-child(2),
+.common-section.animate .used-product-item:nth-child(2) { animation-delay: 0.2s; }
+.common-section.animate .product-card:nth-child(3),
+.common-section.animate .service-item:nth-child(3),
+.common-section.animate .used-product-item:nth-child(3) { animation-delay: 0.3s; }
+.common-section.animate .product-card:nth-child(4),
+.common-section.animate .service-item:nth-child(4),
+.common-section.animate .used-product-item:nth-child(4) { animation-delay: 0.4s; }
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px; /* 헤더 높이 고려 */
+        left: 0;
+        background-color: var(--white-color);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px 0;
+        animation: slideDown 0.3s ease-out forwards;
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .main-nav a {
+        padding: 10px 0;
+        width: 80%;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .main-nav a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text {
+        padding-right: 0;
+    }
+
+    .about-image {
+        margin-top: 30px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .used-content-wrapper {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-section {
+        padding: 100px 0;
+        height: 60vh;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+    }
+
+    .product-card {
+        padding: 20px;
+    }
+
+    .product-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .service-item {
+        padding: 20px;
+    }
+
+    .service-item h3 {
+        font-size: 1.5rem;
+    }
+
+    .service-callout p {
+        font-size: 1.4rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-logo, .footer-info, .footer-links {
+        margin-bottom: 20px;
+    }
+    .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Common Modal Styles */
+.modal-common {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* For fade-in effect */
+    visibility: hidden; /* For fade-in effect */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.modal-common.active {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Default modal-content for 1단계 모달 (Product Category Modal) */
+.modal-common .modal-content {
+    position: relative;
+    background-color: var(--white-color);
+    margin: auto; /* 중앙 정렬 */
+    padding: 30px; /* 기존 패딩 복원 */
+    border-radius: var(--border-radius);
+    max-width: 90%; /* 화면의 90% 너비 */
+    max-height: 90vh; /* 화면 높이의 90% */
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    animation: zoomIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+
+    /* Custom Scrollbar for modal content */
+    &::-webkit-scrollbar {
+        width: 8px; /* 스크롤바의 폭 */
+        height: 8px; /* 가로 스크롤바의 높이 */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--light-gray); /* 트랙 배경색 */
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--primary-color); /* 스크롤 막대 색상 */
+        border-radius: 10px; /* 스크롤 막대 둥글게 */
+        border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color); /* 호버 시 색상 변경 */
+    }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-common .close-btn {
+    color: var(--text-color);
+    font-size: 35px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 10; /* 갤러리 위에 보이도록 */
+}
+
+.modal-common .close-btn:hover,
+.modal-common .close-btn:focus {
+    color: var(--primary-color);
+}
+
+/* Product Category Modal (1단계) Specific Styles (변경 없음 - .modal-common .modal-content에 의해 제어) */
+.product-category-modal .category-modal-title {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.category-product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 10px;
+}
+
+.category-product-card {
+    background-color: var(--light-gray);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.category-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.category-product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    margin-bottom: 15px;
+}
+
+.category-product-card h4 {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.category-product-card p {
+    font-size: 1rem;
+    color: var(--light-text-color);
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Image Gallery Modal (2단계) Specific Styles - 화면 꽉 채우기 */
+.image-gallery-modal .modal-content {
+    margin: 20px; /* 화면 가장자리에서 20px 여백 유지 */
+    width: calc(100vw - 40px); /* 뷰포트 너비에서 40px (20px * 2) 제외 */
+    height: calc(100vh - 40px); /* 뷰포트 높이에서 40px (20px * 2) 제외 */
+    max-width: none; /* 상위 .modal-common .modal-content의 max-width 무시 */
+    max-height: none; /* 상위 .modal-common .modal-content의 max-height 무시 */
+    padding: 15px; /* 내부 패딩 */
+    overflow-y: scroll; /* 변경: 항상 스크롤바 표시 */
+
+    /* Custom Scrollbar for modal content (2단계 모달) */
+    &::-webkit-scrollbar {
+        width: 8px; /* 스크롤바의 폭 */
+        height: 8px; /* 가로 스크롤바의 높이 */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--light-gray); /* 트랙 배경색 */
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--primary-color); /* 스크롤 막대 색상 */
+        border-radius: 10px; /* 스크롤 막대 둥글게 */
+        border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color); /* 호버 시 색상 변경 */
+    }
+}
+
+.image-gallery-modal .gallery-title {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Masonry.js를 위한 그리드 컨테이너 스타일 */
+.modal-gallery-grid {
+    margin: 0 auto;
+    width: 100%; /* 모달 콘텐츠 내에서 가로 전체 사용 */
+    padding: 5px; /* 모달 그리드 자체 패딩 */
+    position: relative; /* Masonry.js 컨테이너는 position: relative여야 함 */
+    flex-grow: 1; /* 남은 공간을 채우도록 */
+    /* Custom Scrollbar for Masonry Grid */
+    &::-webkit-scrollbar {
+        width: 8px; /* 스크롤바의 폭 */
+        height: 8px; /* 가로 스크롤바의 높이 */
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--light-gray); /* 트랙 배경색 */
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--primary-color); /* 스크롤 막대 색상 */
+        border-radius: 10px; /* 스크롤 막대 둥글게 */
+        border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--secondary-color); /* 호버 시 색상 변경 */
+    }
+}
+
+/* Masonry.js 아이템 스타일 */
+.modal-gallery-grid .grid-item-modal {
+    /* 데스크톱: 2열 그리드 */
+    width: calc(50% - 10px); /* 2열 (간격 10px 고려) */
+    margin-bottom: 10px; /* 아이템 간 하단 여백 */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: var(--light-gray); /* 배경색 추가 */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    display: block; /* 이미지 하단 공백 제거 및 flex item으로 동작 */
+    border: 1px solid transparent; /* 스크롤바 깜빡임 방지를 위한 투명 테두리 추가 */
+}
+
+.modal-gallery-grid .grid-item-modal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 */
+}
+
+.modal-gallery-grid .grid-item-modal img {
+    display: block;
+    width: 100%;
+    height: auto; /* Masonry가 높이를 자동으로 조절하므로 auto로 설정 */
+    object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 */
+    border-radius: var(--border-radius); /* 이미지 자체에도 둥근 모서리 적용 */
+}
+
+/* 기존 단일 이미지 갤러리 관련 스타일 제거 (Masonry로 대체) */
+.gallery-image-container,
+#galleryImage,
+.gallery-nav-btn,
+.prev-btn,
+.next-btn,
+.image-caption {
+    display: none !important; /* Masonry 적용으로 인해 더 이상 사용되지 않음 */
+}
+
+
+/* Responsive adjustments for modals */
+@media (max-width: 992px) {
+    /* 1단계 모달에만 적용될 미디어 쿼리 */
+    .product-category-modal .modal-content {
+        max-width: 95%; /* 태블릿에서 1단계 모달 너비 조정 */
+        max-height: 95vh; /* 태블릿에서 1단계 모달 높이 조정 */
+    }
+    /* 2단계 모달에만 적용될 미디어 쿼리 */
+    .image-gallery-modal .modal-content {
+        margin: 15px; /* 태블릿에서 2단계 모달 여백 조정 */
+        width: calc(100vw - 30px);
+        height: calc(100vh - 30px);
+        padding: 10px;
+    }
+    .modal-gallery-grid .grid-item-modal {
+        /* 태블릿: 1열 그리드 */
+        width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 1단계 모달에만 적용될 미디어 쿼리 */
+    .product-category-modal .modal-content {
+        max-width: 98%; /* 모바일에서 1단계 모달 너비 조정 */
+        max-height: 98vh; /* 모바일에서 1단계 모달 높이 조정 */
+        padding: 15px;
+    }
+    /* 2단계 모달에만 적용될 미디어 쿼리 */
+    .image-gallery-modal .modal-content {
+        margin: 10px; /* 모바일에서 2단계 모달 여백 조정 */
+        width: calc(100vw - 20px);
+        height: calc(100vh - 20px);
+        padding: 5px;
+    }
+    .modal-common .close-btn {
+        font-size: 30px;
+        top: 5px;
+        right: 10px;
+    }
+
+    .product-category-modal .category-modal-title,
+    .image-gallery-modal .gallery-title {
+        font-size: 1.8rem;
+    }
+
+    .category-product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-gallery-grid .grid-item-modal {
+        /* 모바일: 1열 그리드 유지 */
+        width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Chatbot Styles */
+.chatbot-container {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 2000;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.chatbot-toggle-btn {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.chatbot-toggle-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    background-color: var(--secondary-color);
+}
+
+.chatbot-window {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    width: 350px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    bottom: 80px; /* 토글 버튼 위로 */
+    right: 0;
+    transform: translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transform-origin: bottom right; /* 변형 원점 설정 */
+}
+
+.chatbot-window.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.chatbot-header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chatbot-header .chatbot-close-btn {
+    background: none;
+    border: none;
+    color: var(--white-color);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.chatbot-header .chatbot-close-btn:hover {
+    transform: rotate(90deg);
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: var(--light-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    /* Custom Scrollbar for chatbot messages */
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #e0e0e0;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--secondary-color);
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+    }
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    line-height: 1.4;
+    word-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.user-message {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    align-self: flex-end; /* 오른쪽 정렬 */
+    border-bottom-right-radius: 2px; /* 꼬리처럼 보이게 */
+}
+
+.bot-message {
+    background-color: var(--white-color);
+    color: var(--text-color);
+    align-self: flex-start; /* 왼쪽 정렬 */
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 2px; /* 꼬리처럼 보이게 */
+}
+
+.bot-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 5px; /* 메시지 아래 여백 */
+    align-self: flex-start;
+    background: none; /* 배경 제거 */
+    border: none; /* 테두리 제거 */
+    box-shadow: none; /* 그림자 제거 */
+    padding: 0; /* 패딩 제거 */
+    max-width: 100%; /* 너비 최대로 */
+}
+
+.quick-reply-btn {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
+}
+
+.quick-reply-btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+
+.chatbot-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--white-color);
+}
+
+.chatbot-input-area input[type="text"] {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 1rem;
+    margin-right: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.chatbot-input-area input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.chatbot-input-area button {
+    background-color: var(--accent-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-input-area button:hover {
+    background-color: #218838; /* 더 진한 강조 색 */
+    transform: scale(1.05);
+}
+
+/* Chatbot Responsive Design */
+@media (max-width: 768px) {
+    .chatbot-container {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .chatbot-toggle-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+    }
+
+    .chatbot-window {
+        /* width: calc(100vw - 30px);  화면 너비에 맞춤 */
+        height: 450px;
+        bottom: 70px; /* 토글 버튼과의 간격 조정 */
+        right: 15px;
+    }
+
+    .chatbot-header {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .chatbot-header .chatbot-close-btn {
+        font-size: 1.5rem;
+    }
+
+    .chatbot-messages {
+        padding: 10px;
+    }
+
+    .message {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .quick-reply-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .chatbot-input-area {
+        padding: 8px;
+    }
+
+    .chatbot-input-area input[type="text"] {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .chatbot-input-area button {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+}
