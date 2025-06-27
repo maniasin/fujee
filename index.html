@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>한국후지공업 - 답십리 총판점</title>
     <!-- CSS 파일 경로 수정 -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/sub.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
@@ -17,9 +18,15 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1c53d786f74232a8d7c37d4920d8fcc6&libraries=services"></script>
 </head>
 <body>
+    <!-- 로딩 스피너 -->
+    <!-- active 클래스를 제거하여 초기에는 숨겨지도록 함 -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
     <header class="main-header">
         <div class="container">
-            <h1 class="logo"><a href="#"><img src="img/logo_on.png" width="175" height="45" border="0" alt="한국후지공업"></a></h1>
+            <h1 class="logo"><a href="#hero"><img src="img/logo_on.png" width="150" height="45" border="0" alt="한국후지공업"></a></h1>
             <nav class="main-nav">
                 <ul>
                     <li><a href="#about">회사소개</a></li>
@@ -36,7 +43,8 @@
     </header>
 
     <main>
-        <section class="hero-section">
+        <!-- hero-section은 항상 표시되므로 content-section 클래스 없음 -->
+        <section id="hero" class="hero-section active">
             <!-- 비디오 배경 추가 -->
             <video autoplay loop muted playsinline preload="auto" class="hero-background-video">
                 <!-- 여기에 실제 비디오 파일 경로를 넣어주세요. (예: videos/background.mp4) -->
@@ -56,23 +64,74 @@
             </div>
         </section>
 
-        <section id="about" class="about-section common-section">
+        <!-- 메인 페이지 퀵 링크 섹션 - hero 섹션 바로 다음에 추가 -->
+        <section id="main-quick-links" class="common-section">
+            <div class="container">
+                <h2 class="section-title animate">빠른 이동</h2>
+                <p class="section-subtitle">주요 서비스 바로가기</p>
+                <div class="main-card-grid">
+                    <a href="#about" class="main-card-item" data-target-id="about">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/main_card_company.jpg" alt="Company Info" loading="lazy">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-title-en">Company Info</span>
+                            <span class="card-title-ko">회사소개</span>
+                        </div>
+                    </a>
+                    <a href="#products" class="main-card-item" data-target-id="products">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/main_card_product.jpg" alt="Product Info" loading="lazy">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-title-en">Product Info</span>
+                            <span class="card-title-ko">제품소개</span>
+                        </div>
+                    </a>
+                    <a href="#services" class="main-card-item" data-target-id="services">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/main_card_service.jpg" alt="Service" loading="lazy">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-title-en">Service</span>
+                            <span class="card-title-ko">서비스</span>
+                        </div>
+                    </a>
+                    <a href="#used" class="main-card-item" data-target-id="used">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/main_card_used.jpg" alt="Used" loading="lazy">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-title-en">Used</span>
+                            <span class="card-title-ko">중고제품</span>
+                        </div>
+                    </a>
+                    <a href="#contact" class="main-card-item" data-target-id="contact">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/main_card_contact.jpg" alt="Online Contact" loading="lazy">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-title-en">Online Contact</span>
+                            <span class="card-title-ko">온라인문의</span>
+                        </div>
+                    </a>                    
+                </div>
+            </div>
+        </section>
+
+        <!-- 각 콘텐츠 섹션에 'content-section' 클래스 추가 -->
+        <section id="about" class="about-section common-section content-section">
             <div class="container">
                 <h2 class="section-title">회사소개</h2>
                 <p class="section-subtitle">한국후지공업은 정직과 신뢰를 바탕으로 성장해왔습니다.</p>
                 <div class="about-content">
                     <div class="about-text">
                         <p>한국후지공업은 1990년부터 육절기 유통 및 서비스를 전문으로 해온 기업입니다. 오랜 기간 축적된 노하우와 기술력을 바탕으로 고객 여러분께 최적의 육절기 솔루션을 제공하고 있습니다.</p>
-                        <p>최고 품질의 신제품 판매부터 신속하고 정확한 AS, 그리고 합리적인 중고 제품 매입 및 판매까지, 고객의 다양한 요구에 맞춰 종합적인 서비스를 제공합니다. 항상 고객 만족을 최우선으로 생각하며, 신뢰할 수 있는 파트너가 되기 위해 노력하겠습니다.</p>
+                        <p>저희는 <span class="counter-highlight"><span id="yearsOfExperienceCounter" data-target-value="35">0</span>년 이상</span>의 업력을 가지고 있으며, 최고 품질의 신제품 판매부터 신속하고 정확한 AS, 그리고 합리적인 중고 제품 매입 및 판매까지, 고객의 다양한 요구에 맞춰 종합적인 서비스를 제공합니다. 항상 고객 만족을 최우선으로 생각하며, 신뢰할 수 있는 파트너가 되기 위해 노력하겠습니다.</p>
                     </div>
                     <div class="about-image">
-                        <img src="images/company_overview.jpg" alt="한국후지공업 전경" loading="lazy">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/company_overview.jpg" alt="한국후지공업 전경" loading="lazy">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="products" class="products-section common-section bg-light-gray">
+        <section id="products" class="products-section common-section bg-light-gray content-section">
             <div class="container">
                 <h2 class="section-title">주요 제품 소개</h2>
                 <p class="section-subtitle">고객의 비즈니스에 최적화된 다양한 육절기를 만나보세요.</p>
@@ -80,31 +139,25 @@
                 <div class="product-grid">
                     <!-- 제품 카테고리 카드: data-category-id 추가 -->
                     <div class="product-card" data-category-id="fresh-slicer">
-                        <img src="img/냉장고속슬라이서.png" alt="냉장 슬라이서" loading="lazy">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/냉장고속슬라이서.png" alt="냉장 슬라이서" loading="lazy">
                         <h3>냉장 슬라이서</h3>
                         <p>정밀하고 빠른 자동 슬라이싱 기능으로 대량 작업에 최적화된 냉장 슬라이서 모델들을 소개합니다.</p>
                         <button class="btn btn-secondary view-category-btn">제품 목록 보기</button>
                     </div>
                     <div class="product-card" data-category-id="frozen-slicer">
-                        <img src="img/냉동육절기.png" height="400px" alt="냉동 슬라이서" loading="lazy">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/냉동육절기.png" height="400px" alt="냉동 슬라이서" loading="lazy">
                         <h3>냉동 슬라이서</h3>
                         <p>견고한 내구성과 사용자 편의성을 겸비한 냉동 슬라이서 모델들을 만나보세요.</p>
                         <button class="btn btn-secondary view-category-btn">제품 목록 보기</button>
                     </div>
                     <div class="product-card" data-category-id="mincer/ham-slicer">
-                        <img src="img/민서기.png" height="400px" alt="민서기/햄슬라이서" loading="lazy">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/민서기.png" height="400px" alt="민서기/햄슬라이서" loading="lazy">
                         <h3>민서기/햄슬라이서</h3>
                         <p>좁은 공간에서도 효율적인 사용이 가능한 민서기/햄슬라이서 모델들을 확인하세요.</p>
                         <button class="btn btn-secondary view-category-btn">제품 목록 보기</button>
                     </div>
-                    <div class="product-card" data-category-id="packaging-machine">
-                        <img src="img/스킨포장기.png" alt="특수포장기" loading="lazy">
-                        <h3>특수포장기</h3>
-                        <p>콤팩트하고 간편한 조작으로 손쉬운 몰드 및 필름 교체 모델들을 확인하세요.</p>
-                        <button class="btn btn-secondary view-category-btn">제품 목록 보기</button>
-                    </div>
                     <div class="product-card" data-category-id="vacuumpackaging-machine/band-saw">
-                        <img src="img/골절기.png" width="382" height="400" alt="진공포장기/골절기" loading="lazy">
+                        <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/골절기.png" width="382" height="400" alt="진공포장기/골절기" loading="lazy">
                         <h3>진공포장기/골절기</h3>
                         <p>HACCP에 맞춘 스테인레스 재질로 제작 작업의 안정성과 정밀성을 두루 갖춘 모델들을 확인하세요.</p>
                         <button class="btn btn-secondary view-category-btn">제품 목록 보기</button>
@@ -113,7 +166,7 @@
             </div>
         </section>
 
-        <section id="services" class="services-section common-section">
+        <section id="services" class="services-section common-section content-section">
             <div class="container">
                 <h2 class="section-title">서비스 (AS / 수리)</h2>
                 <p class="section-subtitle">신속하고 정확한 서비스로 고객님의 불편을 최소화합니다.</p>
@@ -144,7 +197,7 @@
         </section>
 
         <!-- Used Section -->
-        <section id="used" class="used-section common-section bg-light-gray">
+        <section id="used" class="used-section common-section bg-light-gray content-section">
             <div class="container">
                 <h2 class="section-title">중고 제품 매입 및 판매</h2>
                 <p class="section-subtitle">합리적인 가격으로 육절기를 거래하세요.</p>
@@ -166,12 +219,12 @@
                         <div class="used-product-list">
                             <!-- 중고 제품 아이템에 data-product-id 추가 -->
                             <div class="used-product-item" data-product-id="used_fuji_auto_slicer">
-                                <img src="img/중고1.jpg" alt="중고 후지 자동 슬라이서" loading="lazy">
+                                <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/중고1.jpg" alt="중고 후지 자동 슬라이서" loading="lazy">
                                 <p>후지 자동 슬라이서 (상태 A급)</p>
                                 <span class="price">가격 협의</span>
                             </div>
                             <div class="used-product-item" data-product-id="used_stainless_slicer">
-                                <img src="img/중고2.jpg" alt="중고 스텐 육절기" loading="lazy">
+                                <img src="https://placehold.co/1x1/E0E0E0/E0E0E0" data-src="img/중고2.jpg" alt="중고 스텐 육절기" loading="lazy">
                                 <p>스텐 육절기 (경정비 완료)</p>
                                 <span class="price">가격 협의</span>
                             </div>
@@ -185,7 +238,7 @@
             </div>
         </section>
 
-        <section id="contact" class="contact-section common-section">
+        <section id="contact" class="contact-section common-section content-section">
             <div class="container">
                 <h2 class="section-title">문의하기</h2>
                 <p class="section-subtitle">궁금한 점이 있으시면 언제든지 문의해주세요.</p>
@@ -237,21 +290,18 @@
     <footer class="main-footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo"><img src="img/f_logo.png" width="175" height="45" border="0" alt="한국후지공업"></div>
+                <div class="footer-logo"><img src="img/f_logo.png" width="140" height="45" border="0" alt="한국후지공업"></div>
                 <div class="footer-info">
                     <p>대표: 이병진 | 사업자등록번호: 419-29-00433</p>
                     <p>주소: 서울특별시 동대문구 천호대로 47길 62</p>
                     <p><a href="tel:02-2246-6800">전화: 02-2246-6800</a> | 이메일: winzer6633@naver.com</p>
                 </div>
-                <div class="footer-links">
+                <div class="copyright">
                     <ul>
-                        <li><a href="#">개인정보처리방침</a></li>
-                        <li><a href="#">이용약관</a></li>
-                        <li><a href="#">사이트맵</a></li>
+                        <li>© 2025 한국후지공업 답십리 총판점 All rights reserved.</li>
                     </ul>
                 </div>
             </div>
-            <p class="copyright">© 2025 한국후지공업 답십리 총판점 All rights reserved.</p>
         </div>
     </footer>
 
@@ -297,7 +347,14 @@
             </div>
             <div id="chatbotMessages" class="chatbot-messages">
                 <!-- 챗봇 메시지가 여기에 표시됩니다. -->
-                <div class="message bot-message">안녕하세요! 한국후지공업 챗봇입니다. 무엇을 도와드릴까요?</div>                
+                <div class="message bot-message">안녕하세요! 한국후지공업 챗봇입니다. 무엇을 도와드릴까요?</div>
+                <div class="message bot-message bot-options">
+                    <button class="quick-reply-btn" data-query="회사소개">회사소개</button>
+                    <button class="quick-reply-btn" data-query="제품소개">제품소개</button>
+                    <button class="quick-reply-btn" data-query="AS문의">AS 문의</button>
+                    <button class="quick-reply-btn" data-query="중고제품">중고 제품</button>
+                    <button class="quick-reply-btn" data-query="연락처">연락처</button>
+                </div>
             </div>
             <div class="chatbot-input-area">
                 <input type="text" id="chatbotInput" placeholder="메시지를 입력하세요..." />
@@ -312,6 +369,7 @@
     <!-- Masonry.js 라이브러리 CDN (js/script.js 전에 로드) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
     <!-- JS 파일 경로 수정 -->
-    <script src="js/script.js"></script>
+    <script src="js/basescript.js"></script>
+    <script src="js/subscript.js"></script>
 </body>
 </html>
