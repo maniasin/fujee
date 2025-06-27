@@ -1,0 +1,517 @@
+/* Responsive adjustments for modals */
+@media (max-width: 992px) {
+    /* 1단계 모달에만 적용될 미디어 쿼리 */
+    .product-category-modal .modal-content {
+        max-width: 95%; /* 태블릿에서 1단계 모달 너비 조정 */
+        max-height: 95vh; /* 태블릿에서 1단계 모달 높이 조정 */
+    }
+    /* 2단계 모달에만 적용될 미디어 쿼리 */
+    .image-gallery-modal .modal-content {
+        margin: 15px; /* 태블릿에서 2단계 모달 여백 조정 */
+        width: calc(100vw - 30px);
+        height: calc(100vh - 30px);
+        padding: 10px;
+    }
+    .modal-gallery-grid .grid-item-modal {
+        /* 태블릿: 1열 그리드 */
+        width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Chatbot Styles */
+.chatbot-container {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    z-index: 2000;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.chatbot-toggle-btn {
+    background-image: linear-gradient(to right, var(--accent-color), #218838); /* 그라데이션 적용 */
+    color: var(--white-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out, background-image 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* 전환 속성 추가 */
+    background-size: 200% auto; /* 배경 사이즈를 크게 하여 애니메이션 준비 */
+}
+
+.chatbot-toggle-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    background-position: right center; /* 호버 시 그라데이션 이동 */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 강화 */
+}
+
+.chatbot-window {
+    background-color: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    width: 350px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: absolute;
+    bottom: 80px; /* 토글 버튼 위로 */
+    right: 0;
+    transform: translateY(20px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    transform-origin: bottom right; /* 변형 원점 설정 */
+}
+
+.chatbot-window.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.chatbot-header {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chatbot-header .chatbot-close-btn {
+    background: none;
+    border: none;
+    color: var(--white-color);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.chatbot-header .chatbot-close-btn:hover {
+    transform: rotate(90deg);
+}
+
+.chatbot-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: var(--light-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    /* Custom Scrollbar for chatbot messages */
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #e0e0e0;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--secondary-color);
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+    }
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    line-height: 1.4;
+    word-wrap: break-word; /* 긴 텍스트 줄바꿈 */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.user-message {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    align-self: flex-end; /* 오른쪽 정렬 */
+    border-bottom-right-radius: 2px; /* 꼬리처럼 보이게 */
+}
+
+.bot-message {
+    background-color: var(--white-color);
+    color: var(--text-color);
+    align-self: flex-start; /* 왼쪽 정렬 */
+    border: 1px solid var(--border-color);
+    border-bottom-left-radius: 2px; /* 꼬리처럼 보이게 */
+}
+
+.bot-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 5px; /* 메시지 아래 여백 */
+    align-self: flex-start;
+    background: none; /* 배경 제거 */
+    border: none; /* 테두리 제거 */
+    box-shadow: none; /* 그림자 제거 */
+    padding: 0; /* 패딩 제거 */
+    max-width: 100%; /* 너비 최대로 */
+}
+
+.quick-reply-btn {
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
+}
+
+.quick-reply-btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+
+.chatbot-input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--white-color);
+}
+
+.chatbot-input-area input[type="text"] {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 1rem;
+    margin-right: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.chatbot-input-area input[type="text"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.chatbot-input-area button {
+    background-color: var(--accent-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-input-area button:hover {
+    background-color: #218838; /* 더 진한 강조 색 */
+    transform: scale(1.05);
+}
+
+/* New: Main Quick Links Section Styles */
+#main-quick-links {
+    padding: 80px 0;
+    background-color: var(--light-gray); /* 배경색 지정 */
+}
+
+.main-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.main-card-item {
+    position: relative;
+    display: block; /* 링크 전체 영역 클릭 가능 */
+    width: 100%;
+    height: 250px; /* 고정 높이 */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* 링크 밑줄 제거 */
+}
+
+.main-card-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+.main-card-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.main-card-item:hover img {
+    transform: scale(1.05); /* 호버 시 이미지 확대 */
+}
+
+.main-card-item .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)); /* 상단은 연하게, 하단은 진하게 */
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+.main-card-item:hover .card-overlay {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)); /* 호버 시 더 진하게 */
+}
+
+.main-card-item .card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--white-color);
+    padding: 20px;
+}
+
+.main-card-item .card-title-en {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.main-card-item .card-title-ko {
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.9;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+
+/* Consolidated Mobile Responsive Design */
+@media (max-width: 768px) {
+    /* General Responsive Adjustments */
+    .section-title {
+        font-size: 1.8rem; /* 기존 1.6rem에서 더 키움 */
+    }
+
+    .section-subtitle {
+        font-size: 1rem; /* 기존 0.9rem에서 더 키움 */
+    }
+
+    .hero-section {
+        padding: 100px 0;
+        height: 60vh;
+    }
+
+    .hero-title {
+        font-size: 2.2rem; /* 기존 2.0rem에서 더 키움 */
+        white-space: normal; /* 줄바꿈 허용 */
+        word-break: keep-all; /* 단어 단위로 줄바꿈 */
+        padding: 0 10px; /* 좌우 여백 추가 */
+    }
+
+    .hero-subtitle {
+        font-size: 1rem; /* 기존 0.9rem에서 더 키움 */
+    }
+
+    .hero-description {
+        font-size: 0.85rem; /* 설명도 조금 더 줄임 */
+    }
+
+    .product-card {
+        padding: 20px;
+    }
+
+    .product-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .service-item {
+        padding: 20px;
+    }
+
+    .service-item h3 {
+        font-size: 1.5rem;
+    }
+
+    .service-callout p {
+        font-size: 0.9rem; /* 폰트 크기를 더 작게 조정 */
+        text-align: center; /* 텍스트를 중앙 정렬 */
+        white-space: nowrap; /* 전화번호가 줄바꿈되지 않도록 설정 */
+        overflow: hidden; /* 넘치는 내용은 숨김 (필요시) */
+        text-overflow: ellipsis; /* 넘치는 내용에 ... 표시 (필요시) */
+    }
+
+    .service-callout {
+        padding: 25px 20px; /* 좌우 패딩을 늘려 여백 확보 */
+        max-width: 95%; /* 섹션 최대 너비 지정 */
+        margin: auto; /* 섹션을 중앙 정렬 */
+    }
+
+    .common-section {
+        padding: 60px 20px; /* 섹션 상하 패딩 유지 및 좌우 패딩 확보 */
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-logo, .footer-info, .footer-links {
+        margin-bottom: 20px;
+    }
+    .footer-links ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Scroll to Top Button Responsive */
+    .scroll-to-top {
+        bottom: 85px; /* 챗봇 토글 버튼(50px) 위에 충분한 여백을 두고 배치 */
+        right: 15px; /* 챗봇과 동일한 오른쪽 여백 */
+    }
+
+    /* Chatbot Responsive Design */
+    .chatbot-container {
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .chatbot-toggle-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+    }
+
+    .chatbot-window {
+        width: calc(100vw - 30px); /* 화면 너비에 맞춤 */
+        height: 450px;
+        bottom: 70px; /* 토글 버튼과의 간격 조정 */
+        right: 15px;
+    }
+
+    .chatbot-header {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .chatbot-header .chatbot-close-btn {
+        font-size: 1.5rem;
+    }
+
+    .chatbot-messages {
+        padding: 10px;
+    }
+
+    .message {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .quick-reply-btn {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+
+    .chatbot-input-area {
+        padding: 8px;
+    }
+
+    .chatbot-input-area input[type="text"] {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .chatbot-input-area button {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    /* Modal Responsive Adjustments for Mobile */
+    /* 1단계 모달에만 적용될 미디어 쿼리 */
+    .product-category-modal .modal-content {
+        max-width: 98%; /* 모바일에서 1단계 모달 너비 조정 */
+        max-height: 98vh; /* 모바일에서 1단계 모달 높이 조정 */
+        padding: 15px;
+    }
+    /* 2단계 모달에만 적용될 미디어 쿼리 */
+    .image-gallery-modal .modal-content {
+        margin: 10px; /* 모바일에서 2단계 모달 여백 조정 */
+        width: calc(100vw - 20px);
+        height: calc(100vh - 20px);
+        padding: 5px;
+    }
+    .modal-common .close-btn {
+        font-size: 30px;
+        top: 5px;
+        right: 10px;
+    }
+
+    .product-category-modal .category-modal-title,
+    .image-gallery-modal .gallery-title {
+        font-size: 1.8rem;
+    }
+
+    .category-product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-gallery-grid .grid-item-modal {
+        /* 모바일: 1열 그리드 유지 */
+        width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* 중고 제품 섹션 타이틀 개선 */
+    .used-products h3 {
+        font-size: 1.3rem; /* 모바일에서 글자 크기를 줄임 */
+        white-space: nowrap; /* 줄바꿈 방지 */
+        overflow: hidden; /* 넘치는 내용 숨김 */
+        text-overflow: ellipsis; /* 숨겨진 내용에 ... 표시 */
+        padding: 0 10px; /* 좌우 패딩을 추가하여 텍스트가 가장자리에 붙지 않도록 함 */
+    }
+
+    /* New: Main Quick Links Section Responsive Styles */
+    .main-card-item .card-title-en {
+        font-size: 1.5rem;
+    }
+
+    .main-card-item .card-title-ko {
+        font-size: 1rem;
+    }
+}
