@@ -1,26 +1,89 @@
-/* Responsive adjustments for modals */
+/* Responsive Design (from base.css) */
 @media (max-width: 992px) {
-    /* 1단계 모달에만 적용될 미디어 쿼리 */
+    .main-nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 70px; /* 헤더 높이 고려 */
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.95); /* 모바일 메뉴 배경을 더 불투명하게 */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 모바일 메뉴 그림자 강화 */
+        padding: 20px 0;
+        animation: slideDown 0.3s ease-out forwards;
+        border-bottom-left-radius: 15px; /* 모바일 메뉴 하단 좌측 둥글게 */
+        border-bottom-right-radius: 15px; /* 모바일 메뉴 하단 우측 둥글게 */
+    }
+
+    .main-nav.active {
+        display: flex;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .main-nav a {
+        padding: 10px 0;
+        width: 80%;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .main-nav a:last-child {
+        border-bottom: none;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 2.2rem; /* 모바일에서 조금 더 크게 */
+        white-space: normal; /* 줄바꿈 허용 */
+        word-break: keep-all; /* 단어 단위로 줄바꿈 */
+        padding: 0 10px; /* 좌우 여백 추가 */
+    }
+
+    .hero-subtitle {
+        font-size: 1rem; /* 모바일에서 조금 더 크게 */
+    }
+
+    .hero-description {
+        font-size: 0.85rem; /* 설명도 조금 더 줄임 */
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text {
+        padding-right: 0;
+    }
+
+    .about-image {
+        margin-top: 30px;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .used-content-wrapper {
+        flex-direction: column;
+    }
+
+    /* 1단계 모달에만 적용될 미디어 쿼리 (sub.css에 있던 내용) */
     .product-category-modal .modal-content {
         max-width: 95%; /* 태블릿에서 1단계 모달 너비 조정 */
         max-height: 95vh; /* 태블릿에서 1단계 모달 높이 조정 */
     }
-    /* 2단계 모달에만 적용될 미디어 쿼리 */
-    .image-gallery-modal .modal-content {
-        margin: 15px; /* 태블릿에서 2단계 모달 여백 조정 */
-        width: calc(100vw - 30px);
-        height: calc(100vh - 30px);
-        padding: 10px;
-    }
-    .modal-gallery-grid .grid-item-modal {
-        /* 태블릿: 1열 그리드 */
-        width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
-        margin-left: auto;
-        margin-right: auto;
-    }
 }
 
-/* Chatbot Styles */
+/* Chatbot Styles (from sub.css) */
 .chatbot-container {
     position: fixed;
     bottom: 100px;
@@ -110,26 +173,26 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
 
-    /* Custom Scrollbar for chatbot messages */
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
+/* Custom Scrollbar for chatbot messages */
+.chatbot-messages::-webkit-scrollbar {
+    width: 8px;
+}
 
-    &::-webkit-scrollbar-track {
-        background: #e0e0e0;
-        border-radius: 10px;
-    }
+.chatbot-messages::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 10px;
+}
 
-    &::-webkit-scrollbar-thumb {
-        background: var(--secondary-color);
-        border-radius: 10px;
-        border: 2px solid #e0e0e0;
-    }
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+}
 
-    &::-webkit-scrollbar-thumb:hover {
-        background: var(--primary-color);
-    }
+.chatbot-messages::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }
 
 .message {
@@ -186,7 +249,6 @@
     transform: translateY(-2px);
 }
 
-
 .chatbot-input-area {
     display: flex;
     padding: 10px;
@@ -194,7 +256,7 @@
     background-color: var(--white-color);
 }
 
-.chatbot-input-area input[type="text"] {
+.chatbot-input-area input {
     flex-grow: 1;
     padding: 10px 15px;
     border: 1px solid var(--border-color);
@@ -205,7 +267,7 @@
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.chatbot-input-area input[type="text"]:focus {
+.chatbot-input-area input:focus {
     border-color: var(--primary-color);
     outline: none;
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
@@ -232,7 +294,7 @@
     transform: scale(1.05);
 }
 
-/* New: Main Quick Links Section Styles */
+/* New: Main Quick Links Section Styles (from sub.css) */
 #main-quick-links {
     padding: 80px 0;
     background-color: var(--light-gray); /* 배경색 지정 */
@@ -303,6 +365,12 @@
     height: 100%;
     color: var(--white-color);
     padding: 20px;
+    /* 추가: 마우스 오버 시 텍스트가 살짝 위로 올라오는 효과 */
+    transition: transform 0.3s ease;
+}
+
+.main-card-item:hover .card-content {
+    transform: translateY(-5px); /* 호버 시 텍스트 살짝 위로 이동 */
 }
 
 .main-card-item .card-title-en {
@@ -319,8 +387,7 @@
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
 }
 
-
-/* Consolidated Mobile Responsive Design */
+/* Consolidated Mobile Responsive Design (from base.css & sub.css) */
 @media (max-width: 768px) {
     /* General Responsive Adjustments */
     .section-title {
@@ -450,7 +517,7 @@
         padding: 8px;
     }
 
-    .chatbot-input-area input[type="text"] {
+    .chatbot-input-area input {
         padding: 8px 12px;
         font-size: 0.9rem;
     }
@@ -468,13 +535,7 @@
         max-height: 98vh; /* 모바일에서 1단계 모달 높이 조정 */
         padding: 15px;
     }
-    /* 2단계 모달에만 적용될 미디어 쿼리 */
-    .image-gallery-modal .modal-content {
-        margin: 10px; /* 모바일에서 2단계 모달 여백 조정 */
-        width: calc(100vw - 20px);
-        height: calc(100vh - 20px);
-        padding: 5px;
-    }
+
     .modal-common .close-btn {
         font-size: 30px;
         top: 5px;
@@ -488,13 +549,6 @@
 
     .category-product-grid {
         grid-template-columns: 1fr;
-    }
-
-    .modal-gallery-grid .grid-item-modal {
-        /* 모바일: 1열 그리드 유지 */
-        width: calc(100% - 10px); /* 1열 (좌우 여백 5px씩) */
-        margin-left: auto;
-        margin-right: auto;
     }
 
     /* 중고 제품 섹션 타이틀 개선 */
@@ -513,5 +567,157 @@
 
     .main-card-item .card-title-ko {
         font-size: 1rem;
+    }
+}
+
+/* --- 갤러리 모달 그리드 스타일 (이미지 크기 고정 및 정렬) --- (from sub.css) */
+
+/* 모달 컨텐츠가 타이틀 아래에서 시작하도록 패딩 추가 */
+.image-gallery-modal .modal-content {
+    /* 기존 값 */
+    padding-top: 80px;
+    box-sizing: border-box;
+    max-height: 100vh;
+    overflow: hidden;
+    background-color: var(--white-color);
+    position: relative;
+    z-index: 1050;
+
+    /* 추가/수정: 흰색 배경 삐져나옴 방지를 위한 보완 */
+    /* 모달 자체의 배경색이 아니라, 모달 콘텐츠 영역을 명확히 정의하고 */
+    /* 타이틀바와의 시각적 분리를 확실히 합니다. */
+    /* 만약 모달 자체의 배경색이 투명해서 아래 흰색 배경이 보이는 경우, */
+    /* 모달 전체 오버레이에 배경색을 적용하거나, 모달 컨텐츠에 더 명확한 배경을 주어야 합니다. */
+    /* 이 부분은 HTML 구조와 관련이 깊으므로, CSS만으로는 한계가 있을 수 있습니다. */
+    /* 모달이 팝업될 때 전체 화면을 덮는 오버레이(background-color: rgba(0,0,0,0.5); z-index: 1040;)가 있고, */
+    /* 그 위에 modal-content가 있는 구조를 가정합니다. */
+}
+
+/* 갤러리 모달의 타이틀 (TGM이 나오는 부분에 해당할 것으로 추정) */
+.image-gallery-modal .gallery-title {
+    /* 기존 값 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--white-color);
+    padding: 15px 0;
+    font-size: 2.2rem;
+    text-align: center;
+    z-index: 2001;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+
+    /* 추가/수정: 타이틀바의 높이를 고정하여 콘텐츠와의 간섭을 줄임 */
+    height: 80px; /* 타이틀의 대략적인 높이를 고정 (padding 포함) */
+    display: flex; /* 내부 텍스트 수직 중앙 정렬을 위해 flexbox 사용 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+}
+
+.modal-gallery-grid {
+    display: grid;
+    /* PC에서는 각 열의 최소 너비를 더 키워 이미지를 더 크게 표시 */
+    /* 기존: minmax(300px, 1fr) */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* 최소 너비를 320px로 상향 조정 */
+    gap: 15px;
+    padding: 20px;
+    justify-content: center; /* 그리드 항목들을 중앙 정렬 */
+    /* align-items: center; */ /* 그리드 아이템 높이가 제각각일 때 사용, 여기서는 비율 유지하므로 불필요하거나 grid-item-modal 내부에서 처리 */
+    overflow-y: auto;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    /* 2. PC 화면 이미지 크기 및 여백 문제 개선 */
+    /* 그리드 자체의 최대 높이를 화면 높이에서 타이틀바 높이와 그리드 패딩을 제외한 값으로 설정 */
+    /* calc 계산을 좀 더 명확히 하고, 필요시 모달 하단의 버튼 등의 높이도 고려해야 함 */
+    max-height: calc(100vh - 80px - (20px * 2) - 20px); /* 100vh에서 타이틀바(80px), 상하패딩(20px*2), 그리고 아래 추가 여백(20px) 제외 */
+    /* 전체 화면 높이에서 모달 타이틀바 높이와 그리드 컨텐츠의 상하 패딩을 뺀 값으로 설정 */
+    /* 모달 자체의 max-height: 90vh가 설정되어 있으므로, 이 그리드도 90vh 안에서 계산되어야 합니다. */
+    /* 따라서 `max-height: calc(90vh - 80px - (20px * 2));` 가 더 정확할 수 있습니다. */
+    /* 하지만 이미지가 작아 보이고 여백이 많다는 피드백이 있으므로, 모달의 `max-height`를 `100vh`에 가깝게 키우거나 */
+    /* 그리드 자체의 높이 계산을 좀 더 여유롭게 가져갈 필요가 있습니다. */
+    /* 일단 `max-height: calc(100vh - 80px - 40px);` 로 설정하고, 뷰포트 높이에 최대한 맞추도록 시도합니다. */
+    /* 20px는 하단에 여유 공간을 더 확보하기 위한 임의 값입니다. 실제 HTML 구조에 따라 조절 필요. */
+}
+
+.modal-gallery-grid .grid-item-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--white-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    /* 가로세로 비율 유지 (4:3) */
+    padding-bottom: 75%; /* width에 대한 75% 높이 (4:3 비율) */
+    position: relative;
+    width: 100%;
+}
+
+.modal-gallery-grid .grid-item-modal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.modal-gallery-grid .grid-item-modal img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 이미지가 잘리지 않고 전체가 보이도록 */
+    display: block;
+    border-radius: inherit;
+    transition: transform 0.3s ease;
+}
+
+.modal-gallery-grid .grid-item-modal img:hover {
+    transform: scale(1.05);
+}
+
+/* 모바일 화면 (768px 이하) */
+@media (max-width: 768px) {
+    /* 모달 콘텐츠 상단 패딩 조정 (모바일 타이틀 높이 고려) */
+    .image-gallery-modal .modal-content {
+        padding-top: 60px;
+        max-height: 95vh; /* 모바일에서 모달 전체 높이 조정 */
+    }
+
+    /* 모바일 타이틀 폰트 크기 조정 */
+    .image-gallery-modal .gallery-title {
+        font-size: 1.8rem;
+        padding: 10px 0;
+        height: 60px; /* 모바일 타이틀 높이 고정 */
+    }
+
+    .modal-gallery-grid {
+        /* 모바일에서는 한 줄에 2개 또는 1개만 보이도록 minmax 조정 */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+        padding: 10px;
+        /* 모바일 타이틀 높이 및 그리드 상하 패딩 고려 */
+        max-height: calc(95vh - 60px - (10px * 2) - 10px); /* 모바일 모달 높이 - 타이틀 높이 - 그리드 상하 패딩 - 하단 여유 공간 */
+        /* 하단 10px는 추가적인 여유 공간입니다. 실제 필요에 따라 조절하세요. */
+    }
+    .modal-gallery-grid .grid-item-modal {
+        padding-bottom: 75%;
+    }
+}
+
+/* 아주 작은 화면 (480px 이하) - 1열 정렬 */
+@media (max-width: 480px) {
+    .modal-gallery-grid {
+        grid-template-columns: 1fr; /* 1열로 강제 */
+        gap: 10px;
+        padding: 10px;
+        max-height: calc(95vh - 60px - (10px * 2) - 10px); /* 모바일과 동일한 계산 적용 */
+    }
+    .modal-gallery-grid .grid-item-modal {
+        padding-bottom: 75%;
     }
 }

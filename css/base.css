@@ -248,7 +248,6 @@ ul {
     filter: brightness(0.8); /* 비디오를 약간 어둡게 하여 텍스트 가독성 높임 */
 }
 
-
 .hero-image-overlay {
     position: absolute;
     top: 0;
@@ -329,7 +328,6 @@ ul {
     font-size: 1.3em; /* 주변 텍스트보다 살짝 크게 */
     transition: all 0.5s ease-out;
 }
-
 
 .about-image {
     flex: 1;
@@ -431,7 +429,6 @@ ul {
     transform: scale(1.15); /* 호버 시 더 크게 */
     filter: drop-shadow(0 0 8px rgba(var(--accent-color-rgb), 0.7)); /* 아이콘에 빛나는 효과 */
 }
-
 
 .service-item h3 {
     font-size: 1.8rem;
@@ -559,7 +556,6 @@ ul {
     font-weight: 700;
 }
 
-
 /* Contact Section */
 .contact-grid {
     display: grid;
@@ -686,7 +682,6 @@ ul {
     height: 450px; /* 지도의 높이 설정 */
     border-radius: var(--border-radius);
 }
-
 
 /* Footer */
 .main-footer {
@@ -844,7 +839,6 @@ img[data-src].loaded {
     /* 이제 이 섹션 내부 요소에 애니메이션 클래스를 적용합니다. */
 }
 
-
 /* Loading Spinner Styles */
 .loading-overlay {
     position: fixed;
@@ -880,7 +874,6 @@ img[data-src].loaded {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
 
 /* Intersection Observer Animations */
 /* 이 부분은 이제 .content-section.active 내부에 있을 때만 작동하도록 JS에서 클래스를 추가/제거해야 합니다. */
@@ -928,7 +921,6 @@ img[data-src].loaded {
     opacity: 0; /* 애니메이션 시작 전 숨김 */
 }
 
-
 /* Stagger animation for grid items */
 .content-section.active .product-card:nth-child(1),
 .content-section.active .service-item:nth-child(1),
@@ -942,86 +934,6 @@ img[data-src].loaded {
 .content-section.active .product-card:nth-child(4),
 .content-section.active .service-item:nth-child(4),
 .content-section.active .used-product-item:nth-child(4) { animation-delay: 0.4s; }
-
-
-/* Responsive Design */
-@media (max-width: 992px) {
-    .main-nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 70px; /* 헤더 높이 고려 */
-        left: 0;
-        background-color: rgba(255, 255, 255, 0.95); /* 모바일 메뉴 배경을 더 불투명하게 */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* 모바일 메뉴 그림자 강화 */
-        padding: 20px 0;
-        animation: slideDown 0.3s ease-out forwards;
-        border-bottom-left-radius: 15px; /* 모바일 메뉴 하단 좌측 둥글게 */
-        border-bottom-right-radius: 15px; /* 모바일 메뉴 하단 우측 둥글게 */
-    }
-
-    .main-nav.active {
-        display: flex;
-    }
-
-    .main-nav ul {
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-    }
-
-    .main-nav a {
-        padding: 10px 0;
-        width: 80%;
-        text-align: center;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .main-nav a:last-child {
-        border-bottom: none;
-    }
-
-    .nav-toggle {
-        display: block;
-    }
-
-    .hero-title {
-        font-size: 2.2rem; /* 모바일에서 조금 더 크게 */
-        white-space: normal; /* 줄바꿈 허용 */
-        word-break: keep-all; /* 단어 단위로 줄바꿈 */
-        padding: 0 10px; /* 좌우 여백 추가 */
-    }
-
-    .hero-subtitle {
-        font-size: 1rem; /* 모바일에서 조금 더 크게 */
-    }
-
-    .hero-description {
-        font-size: 0.85rem; /* 설명도 조금 더 줄임 */
-    }
-
-    .about-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .about-text {
-        padding-right: 0;
-    }
-
-    .about-image {
-        margin-top: 30px;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .used-content-wrapper {
-        flex-direction: column;
-    }
-}
 
 /* Common Modal Styles */
 .modal-common {
@@ -1060,27 +972,27 @@ img[data-src].loaded {
     animation: zoomIn 0.3s ease-out;
     display: flex;
     flex-direction: column;
+}
 
-    /* Custom Scrollbar for modal content */
-    &::-webkit-scrollbar {
-        width: 8px; /* 스크롤바의 폭 */
-        height: 8px; /* 가로 스크롤바의 높이 */
-    }
+/* Custom Scrollbar for modal content (Product Category Modal) */
+.modal-common .modal-content::-webkit-scrollbar {
+    width: 8px; /* 스크롤바의 폭 */
+    height: 8px; /* 가로 스크롤바의 높이 */
+}
 
-    &::-webkit-scrollbar-track {
-        background: var(--light-gray); /* 트랙 배경색 */
-        border-radius: 10px;
-    }
+.modal-common .modal-content::-webkit-scrollbar-track {
+    background: var(--light-gray); /* 트랙 배경색 */
+    border-radius: 10px;
+}
 
-    &::-webkit-scrollbar-thumb {
-        background: var(--primary-color); /* 스크롤 막대 색상 */
-        border-radius: 10px; /* 스크롤 막대 둥글게 */
-        border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
-    }
+.modal-common .modal-content::-webkit-scrollbar-thumb {
+    background: var(--primary-color); /* 스크롤 막대 색상 */
+    border-radius: 10px; /* 스크롤 막대 둥글게 */
+    border: 2px solid var(--light-gray); /* 트랙과의 경계선 */
+}
 
-    &::-webkit-scrollbar-thumb:hover {
-        background: var(--secondary-color); /* 호버 시 색상 변경 */
-    }
+.modal-common .modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color); /* 호버 시 색상 변경 */
 }
 
 @keyframes zoomIn {
@@ -1089,15 +1001,15 @@ img[data-src].loaded {
 }
 
 .modal-common .close-btn {
-    color: var(--text-color);
+    color: white; /* 닫기 버튼 색상 변경 (흰색으로 통일) */
     font-size: 35px;
     font-weight: bold;
-    position: absolute;
-    top: 0px;
-    right: 20px;
+    position: fixed; /* 전체 화면 모달에서 위치 고정 */
+    top: 15px; /* 상단 여백 */
+    right: 20px; /* 우측 여백 */
     cursor: pointer;
     transition: color 0.2s;
-    z-index: 10; /* 갤러리 위에 보이도록 */
+    z-index: 2002; /* 갤러리 제목보다 위로 */
 }
 
 .modal-common .close-btn:hover,
@@ -1161,96 +1073,47 @@ img[data-src].loaded {
 
 /* Image Gallery Modal (2단계) Specific Styles - 화면 꽉 채우기 */
 .image-gallery-modal .modal-content {
-    margin: 20px; /* 화면 가장자리에서 20px 여백 유지 */
-    width: calc(100vw - 40px); /* 뷰포트 너비에서 40px (20px * 2) 제외 */
-    height: calc(100vh - 40px); /* 뷰포트 높이에서 40px (20px * 2) 제외 */
+    margin: 0; /* 변경: 화면 가장자리에 붙임 */
+    width: 100vw; /* 변경: 뷰포트 전체 너비 */
+    height: 100vh; /* 변경: 뷰포트 전체 높이 */
     max-width: none; /* 상위 .modal-common .modal-content의 max-width 무시 */
     max-height: none; /* 상위 .modal-common .modal-content의 max-height 무시 */
-    padding: 15px; /* 내부 패딩 */
-    overflow-y: scroll; /* 변경: 항상 스크롤바 표시 */
+    padding: 0; /* 변경: 내부 패딩 제거 */
+    overflow-y: auto; /* 필요에 따라 스크롤 유지 */
+}
 
-    /* Custom Scrollbar for modal content (2단계 모달) */
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
+/* Custom Scrollbar for modal content (2단계 모달) */
+.image-gallery-modal .modal-content::-webkit-scrollbar {
+    width: 8px;
+}
 
-    &::-webkit-scrollbar-track {
-        background: var(--light-gray);
-        border-radius: 10px;
-    }
+.image-gallery-modal .modal-content::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: 10px;
+}
 
-    &::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 10px;
-        border: 2px solid var(--light-gray);
-    }
+.image-gallery-modal .modal-content::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+    border: 2px solid var(--light-gray);
+}
 
-    &::-webkit-scrollbar-thumb:hover {
-        background: var(--secondary-color);
-    }
+.image-gallery-modal .modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
 }
 
 .image-gallery-modal .gallery-title {
     font-size: 2.2rem;
-    color: var(--primary-color);
-    margin-bottom: 20px;
+    color: var(--white-color); /* 제목 색상 흰색으로 변경 */
     text-align: center;
-}
-
-/* Masonry.js를 위한 그리드 컨테이너 스타일 */
-.modal-gallery-grid {
-    margin: 0 auto;
-    width: 100%; /* 모달 콘텐츠 내에서 가로 전체 사용 */
-    padding: 5px; /* 모달 그리드 자체 패딩 */
-    position: relative; /* Masonry.js 컨테이너는 position: relative여야 함 */
-    flex-grow: 1; /* 남은 공간을 채우도록 */
-    /* Custom Scrollbar for Masonry Grid */
-    &::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: var(--light-gray);
-        border-radius: 10px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background: var(--primary-color);
-        border-radius: 10px;
-        border: 2px solid var(--light-gray);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background: var(--secondary-color);
-    }
-}
-
-/* Masonry.js 아이템 스타일 */
-.modal-gallery-grid .grid-item-modal {
-    /* 데스크톱: 2열 그리드 */
-    width: calc(50% - 10px); /* 2열 (간격 10px 고려) */
-    margin-bottom: 10px;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    background-color: var(--light-gray); /* 배경색 추가 */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    cursor: pointer;
-    display: block; /* 이미지 하단 공백 제거 및 flex item으로 동작 */
-    border: 1px solid transparent; /* 스크롤바 깜빡임 방지를 위한 투명 테두리 추가 */
-}
-
-.modal-gallery-grid .grid-item-modal:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* 호버 시 그림자 */
-}
-
-.modal-gallery-grid .grid-item-modal img {
-    display: block;
+    padding: 15px 0; /* 상하 패딩 */
+    background-color: rgba(0, 0, 0, 0.7); /* 어두운 배경으로 가독성 확보 */
+    position: fixed; /* 화면 상단에 고정 */
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto; /* Masonry가 높이를 자동으로 조절하므로 auto로 설정 */
-    object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 */
-    border-radius: var(--border-radius); /* 이미지 자체에도 둥근 모서리 적용 */
+    z-index: 2001; /* 닫기 버튼 아래, 이미지 위에 표시 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
 }
 
 /* 기존 단일 이미지 갤러리 관련 스타일 제거 (Masonry로 대체) */
