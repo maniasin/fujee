@@ -292,7 +292,7 @@
         // 옵션: 모든 이미지 로딩이 시작된 후 최종 레이아웃 재조정
         // imagesLoaded는 모든 이미지가 처리(로드/오류)되었을 때 감지합니다.
         if (typeof imagesLoaded !== 'undefined') {
-            imagesLoaded(modalGalleryGrid).on('always', function() {
+            imagesLoaded(modalGalleryGrid).on('always', function () {
                 setTimeout(() => { // 브라우저에 약간의 시간 주기
                     if (modalMasonryInstance) {
                         modalMasonryInstance.layout();
