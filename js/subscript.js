@@ -12,118 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const productDetailModal = document.getElementById('productDetailModal');
     const detailContainer = productDetailModal?.querySelector('.product-detail-container');
 
-    // --- 2. 데이터 정의 (모든 제품 정보 복원 및 상세 정보 추가) ---
-    const productsData = {
-        'fresh-slicer': {
-            name: '냉장 슬라이서 제품 목록',
-            models: {
-                'TGM': {
-                    displayName: 'TGM',
-                    description: `회전 방향을 달리하는 두 개의 원형 칼날을 통해 신속하고 부드러운 절단 (특허)`,
-                    thumbnail: 'https://fujee.com/uploaded/product/21/66712ed6c0d1fa4a7c2432464d429b540.jpg',
-                    images: ['https://fujee.com/uploaded/product/21/66712ed6c0d1fa4a7c2432464d429b540.jpg', 'https://fujee.com/uploaded/product/21/66712ed6c0d1fa4a7c2432464d429b541.jpg', 'https://fujee.com/uploaded/product/21/66712ed6c0d1fa4a7c2432464d429b542.jpg', 'https://fujee.com/uploaded/product/21/66712ed6c0d1fa4a7c2432464d429b543.jpg'],
-                    features: ['회전 방향을 달리하는 두 개의 원형 칼날 (특허)', '2-Way의 안정적인 윗누름부 방식 채용 (특허)', '신속하고 부드러운 절단', '위생적인 스테인레스 스틸 구조'],
-                    specs: { '절단규격': '290(W) x 210(H) x 600(L) mm', '두께': '0.1 ~ 30 mm', '중량': '250 kg', '전원': '3상 380V / 220V' }
-                },
-                'ATT': {
-                    displayName: 'ATT',
-                    description: `냉장육 고속 절단 및 0.1mm 단위까지 두께 조절이 가능한 실용적인 모델`,
-                    thumbnail: 'https://fujee.com/uploaded/product/22/27d00dbd41ef2ee27bf5b5369838bd4d0.jpg',
-                    images: ['https://fujee.com/uploaded/product/22/27d00dbd41ef2ee27bf5b5369838bd4d0.jpg', 'https://fujee.com/uploaded/product/22/27d00dbd41ef2ee27bf5b5369838bd4d1.jpg'],
-                    features: ['0.1mm 단위까지 두께 조절 가능', '고속 회전 칼날로 생산성 향상', '콤팩트한 디자인', '카세트식 컨베이어로 청소 용이'],
-                    specs: { '절단규격': '250(W) x 180(H) x 500(L) mm', '두께': '0.1 ~ 25 mm', '중량': '200 kg', '전원': '3상 380V / 220V' }
-                },
-                'COX': {
-                    displayName: 'COX',
-                    description: `독일제 칼날과 안전판 센서를 장착한 안정적인 고급형 모델`,
-                    thumbnail: 'https://fujee.com/uploaded/product/39/aaca45f67d7a5eaf9b469682fe591c550.jpg',
-                    images: ['https://fujee.com/uploaded/product/39/aaca45f67d7a5eaf9b469682fe591c550.jpg', 'https://fujee.com/uploaded/product/39/aaca45f67d7a5eaf9b469682fe591c551.jpg'],
-                    features: ['독일 GURND&BUNSE 社 칼날 사용', '안전판 센서 부착', '더욱 넓어진 고기받이판', '적재함 인버터 제어', '신개념 칼 보호 커버 장착'],
-                    specs: { '절단두께': '1 ~ 20 mm', '처리능력': '분당 40~65매', '중량': '230 kg', '전원': '3상 220V / 380V' }
-                },
-                'FSK-20-FSK-30': {
-                    displayName: 'FSK-20 / FSK-30',
-                    description: `독일 Zico 칼날을 사용하며 물청소가 가능한 위생적인 모델`,
-                    thumbnail: 'https://fujee.com/uploaded/product/63/0c67825d6b2afd835ad0a5ea77bb33a20.jpg',
-                    images: ['https://fujee.com/uploaded/product/63/0c67825d6b2afd835ad0a5ea77bb33a20.jpg', 'https://fujee.com/uploaded/product/63/0c67825d6b2afd835ad0a5ea77bb33a21.jpg'],
-                    features: ['독일 Zico 社 칼날 사용', '물청소가 가능한 구조', '정확한 두께로 작업 가능', '항균 우레탄 벨트 사용'],
-                    specs: { '기계치수': '850 x 700 x 1350 mm', '절단규격': '200(W) x 150(H) mm', '두께': '1 ~ 30 mm', '중량': '150 kg' }
-                },
-                'FSK-20R': {
-                    displayName: 'FSK-20R',
-                    description: `고정 손잡이를 이용해 누구나 손쉽게 미세조절 및 작업이 가능한 스키너`,
-                    thumbnail: 'https://fujee.com/uploaded/product/420/32dd9020b10c217711b136a49cfafe120.png',
-                    images: ['https://fujee.com/uploaded/product/420/32dd9020b10c217711b136a49cfafe120.png'],
-                    features: ['돈피,계육,오징어 등 껍질제거(스키너)', '손쉬운 미세조절', '편리한 조작', '발판 스위치 작동'],
-                    specs: { '기계치수': '600 x 550 x 950 mm', '처리능력': '분당 18m', '중량': '100 kg', '전원': '3상 220V/380V, 0.75kW' }
-                }
-            }
-        },
-        'frozen-slicer': {
-            name: '냉동 슬라이서 제품 목록',
-            models: {
-                'WARRIOR-FRI-430': {
-                    displayName: 'WARRIOR (FRI-430)',
-                    description: `터치스크린과 개폐형 도어를 채택한 고성능 냉동 육절기`,
-                    thumbnail: 'https://fujee.com/uploaded/product/292/e57def7a04b4d1e2af235f1cdb76a6440.jpg',
-                    images: ['https://fujee.com/uploaded/product/292/e57def7a04b4d1e2af235f1cdb76a6440.jpg', 'https://fujee.com/uploaded/product/292/e57def7a04b4d1e2af235f1cdb76a6441.jpg'],
-                    features: ['조작이 간편한 터치스크린 컨트롤 판넬', '고기 적재가 편리한 개폐형 도어', '물청소 가능한 방수 대응 설계', '상품 배열 선택 가능 (단속/연속 작업)'],
-                    specs: { '기계치수': '1520 x 1030 x 1550 mm', '절단규격': '430(W) x 210(H) x 700(L) mm', '두께': '0.1 ~ 50 mm', '사용온도': '-7℃ ~ -2℃' }
-                },
-                'SMP-20-30N': {
-                    displayName: 'SMP-20/30N',
-                    description: `경제성과 실용성이 뛰어난 보급형 냉동 육절기`,
-                    thumbnail: 'https://fujee.com/uploaded/product/51/054e5a7d1beee8eaf9945810294449a30.jpg',
-                    images: ['https://fujee.com/uploaded/product/51/054e5a7d1beee8eaf9945810294449a30.jpg', 'https://fujee.com/uploaded/product/51/054e5a7d1beee8eaf9945810294449a31.jpg'],
-                    features: ['HTD벨트를 사용하여 정숙한 운전', '0.1mm 단위까지 미세조절 가능', '스테인레스 특수강 칼날 채용', '장기간 판매로 검증된 안정된 품질'],
-                    specs: { '기계치수': '1050 x 770 x 1470 mm', '절단규격': '300(W) x 190(H) x 600(L) mm', '두께': '0.1 ~ 20 mm', '사용온도': '-4℃ ~ 0℃' }
-                }
-            }
-        },
-        'mincer/ham-slicer': {
-            name: '민서기/햄슬라이서 제품 목록',
-            models: {
-                'MGB-32': {
-                    displayName: 'MGB-32 (민서기)',
-                    description: `고성능, 고효율의 대형 민서기. 콤팩트한 외형으로 협소한 장소에서 사용 가능`,
-                    thumbnail: 'https://fujee.com/uploaded/product/253/abe7d5b287fdecaf55a808e8665dafc90.jpg',
-                    images: ['https://fujee.com/uploaded/product/253/abe7d5b287fdecaf55a808e8665dafc90.jpg'],
-                    features: ['독일 ZICO社 칼날 및 망 사용', '저소음 강력한 직결 감속기 채용 (5HP)', '고기 접촉부 전체 스테인레스 스틸', '헤드 부분 탈착 레버로 간단히 분리'],
-                    specs: { '처리능력': '시간당 500~600kg', '모터': '5HP', '중량': '150kg', '전원': '3상 220V/380V' }
-                },
-                'SOL-20': {
-                    displayName: 'SOL-20 (햄슬라이서)',
-                    description: `소시지, 햄, 가공육 등을 자동으로 절단하여 능률적인 작업이 가능한 모델`,
-                    thumbnail: 'https://fujee.com/uploaded/product/47/e22a5766aadc4ef4c1aab75ca7a5d5d80.jpg',
-                    images: ['https://fujee.com/uploaded/product/47/e22a5766aadc4ef4c1aab75ca7a5d5d80.jpg', 'https://fujee.com/uploaded/product/47/e22a5766aadc4ef4c1aab75ca7a5d5d81.jpg'],
-                    features: ['독일 GURND&BUNSE 社 칼날 사용', '자동(Auto) 기능으로 능률적 작업', '안전 센서 및 비상 정지 버튼'],
-                    specs: { '기계치수': '700 x 600 x 600 mm', '절단규격': '220(W) x 160(H) mm', '두께': '0.1 ~ 13 mm', '중량': '65 kg'}
-                }
-            }
-        },
-        'vacuumpackaging-machine/band-saw': {
-            name: '진공포장기/골절기 제품 목록',
-            models: {
-                'NVP-S5': {
-                    displayName: 'NVP-S5 (진공포장기)',
-                    description: `독일 BUSCH 펌프를 사용하여 진공 능력이 보장된 안정적인 진공포장기`,
-                    thumbnail: 'https://fujee.com/uploaded/product/82/21b1f933920d21a9d05abfa1cbb525a30.jpg',
-                    images: ['https://fujee.com/uploaded/product/82/21b1f933920d21a9d05abfa1cbb525a30.jpg', 'https://fujee.com/uploaded/product/82/21b1f933920d21a9d05abfa1cbb525a31.jpg'],
-                    features: ['독일 BUSCH社 펌프 사용', '조작이 간편한 구조', '용도별 단독 스위치 채용', '청결, 위생, 안전을 고려한 설계'],
-                    specs: { '기계치수': '580 x 750 x 990 mm', '진공실규격': '510 x 600 x 170 mm', '진공펌프': '20 m³/h', '중량': '93 kg' }
-                },
-                'HAS-350S': {
-                    displayName: 'HAS-350S (골절기)',
-                    description: `HACCP에 맞춘 스테인레스 재질로 제작되어 위생적이며 안전성과 정밀성을 갖춘 골절기`,
-                    thumbnail: 'https://fujee.com/uploaded/product/67/8143a0f8214bcbd8743778a454dcb1d80.jpg',
-                    images: ['https://fujee.com/uploaded/product/67/8143a0f8214bcbd8743778a454dcb1d80.jpg'],
-                    features: ['HACCP 기준 스테인레스 재질', '물청소가 용이하여 위생적', '작업 안전성과 정밀성', '미끄럼 방지 테이블'],
-                    specs: { '기계치수': '850 x 850 x 1750 mm', '테이블규격': '850 x 850 mm', '최대절단높이': '350 mm', '톱날길이': '2,515 mm' }
-                }
-            }
-        }
-    };
+    const chatbotToggleBtn = document.getElementById('chatbotToggleBtn');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotCloseBtn = document.getElementById('chatbotCloseBtn');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSendBtn = document.getElementById('chatbotSendBtn');
 
+    // --- 2. 데이터 정의 (FAQ 데이터만 남김) ---
     const faqResponses = {
         "회사소개": "한국후지공업은 35년 넘게 육가공 기계 및 특수 포장 기계를 제조, 판매해온 전문 기업입니다. 최고의 기술력과 노하우로 고객 여러분의 성공을 돕겠습니다.",
         "제품소개": "저희는 냉장/냉동 슬라이서, 민서기, 햄 슬라이서, 특수 포장기, 진공 포장기, 골절기 등 다양한 고품질 육가공 기계를 취급합니다. 자세한 내용은 '제품' 메뉴를 참고해주세요.",
@@ -166,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
         usedInventory.forEach(product => {
             const item = document.createElement('div');
             item.className = 'used-product-item';
-            // 이벤트 위임을 위해 dataset에 id 저장
             item.dataset.productId = product.id;
 
             if (product.status === '판매완료') {
@@ -285,19 +180,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         galleryTitle.textContent = title;
         modalGalleryGrid.innerHTML = '';
-        modalGalleryGrid.classList.remove('single-image-mode'); // 이전 클래스 제거
+        modalGalleryGrid.classList.remove('single-image-mode');
 
         if (!imagesArray || imagesArray.length === 0) {
             modalGalleryGrid.innerHTML = '<p>표시할 이미지가 없습니다.</p>';
         } else if (imagesArray.length === 1) {
-            // 이미지가 하나일 때
             modalGalleryGrid.classList.add('single-image-mode');
             const img = document.createElement('img');
             img.src = imagesArray[0];
             img.alt = title;
             modalGalleryGrid.appendChild(img);
         } else {
-            // 이미지가 여러 개일 때 (기존 그리드 방식)
             imagesArray.forEach(imgSrc => {
                 const gridItem = document.createElement('div');
                 gridItem.className = 'grid-item-modal';
@@ -393,7 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // [수정] 중고 제품 클릭 이벤트 (이벤트 위임 방식)
     const usedProductList = document.querySelector('.used-product-list');
     if(usedProductList) {
         usedProductList.addEventListener('click', (event) => {
