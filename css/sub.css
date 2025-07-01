@@ -328,11 +328,10 @@
 .category-product-card img {
     width: 100%;
     height: 180px;
-    /* [문제 해결] cover -> contain 으로 변경하여 이미지 전체가 보이도록 함 */
     object-fit: contain;
     border-radius: var(--border-radius);
     margin-bottom: 15px;
-    background-color: #f8f9fa; /* 여백 배경색을 밝은 회색으로 */
+    background-color: #f8f9fa;
 }
 
 .category-product-card h4 {
@@ -454,6 +453,7 @@
 .modal-gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px; /* [문제 해결] 사파리 호환성을 위해 추가 */
     gap: 15px;
     padding: 10px;
     overflow-y: auto;
@@ -541,7 +541,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* [문제 해결] cover -> contain 으로 변경하여 이미지 전체가 보이도록 함 */
     object-fit: contain;
 }
 
@@ -622,19 +621,12 @@
         right: 10px;
     }
 
-    .product-category-modal .category-modal-title {
-        font-size: 1.2rem;
-        padding: 0 40px;
-        word-break: keep-all;
-        line-height: 1.4;
-    }
-
+    .product-category-modal .category-modal-title,
     .image-gallery-modal .gallery-title {
         font-size: 1.2rem;
         padding: 0 40px;
         word-break: keep-all;
         line-height: 1.4;
-        height: 60px;
     }
 
     .category-product-grid { grid-template-columns: 1fr; }
@@ -650,6 +642,7 @@
 
     /* Gallery Modal Responsive */
     .image-gallery-modal .modal-content { padding: 60px 10px 10px 10px; }
+    .image-gallery-modal .gallery-title { height: 60px; }
     .modal-gallery-grid {
         grid-template-columns: 1fr;
         gap: 10px;
