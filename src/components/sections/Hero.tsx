@@ -14,44 +14,65 @@ export default function Hero() {
     useGSAP(() => {
         const tl = gsap.timeline();
 
-        // Initial fade in for non-text elements
+        // 비디오 애니메이션
         tl.from(videoRef.current, {
             opacity: 0,
             duration: 1.5,
             ease: "power2.inOut",
-        })
-            .from(textRef.current?.querySelector('div:first-child'), { // Logo
+        });
+
+        // 1. Logo (안전하게 체크)
+        const logo = textRef.current?.querySelector('div:first-child');
+        if (logo) {
+            tl.from(logo, {
                 y: 50,
                 opacity: 0,
                 duration: 1,
                 ease: "power3.out",
-            }, "-=1")
-            .from(textRef.current?.querySelector('span'), { // Subtitle
+            }, "-=1");
+        }
+
+        // 2. Subtitle (안전하게 체크)
+        const subtitle = textRef.current?.querySelector('span');
+        if (subtitle) {
+            tl.from(subtitle, {
                 y: 20,
                 opacity: 0,
                 duration: 0.8,
                 ease: "power3.out",
-            }, "-=0.8")
-            // Typing animation for title
-            .to(".hero-char", {
-                opacity: 1,
-                y: 0,
-                duration: 0.1,
-                stagger: 0.1,
-                ease: "none",
-            }, "-=0.5")
-            .from(textRef.current?.querySelector('p'), { // Description
+            }, "-=0.8");
+        }
+
+        // 3. Typing animation (클래스 선택자는 안전함)
+        tl.to(".hero-char", {
+            opacity: 1,
+            y: 0,
+            duration: 0.1,
+            stagger: 0.1,
+            ease: "none",
+        }, "-=0.5");
+
+        // 4. Description (안전하게 체크)
+        const description = textRef.current?.querySelector('p');
+        if (description) {
+            tl.from(description, {
                 y: 30,
                 opacity: 0,
                 duration: 1,
                 ease: "power3.out",
-            }, "-=0.5")
-            .from(textRef.current?.lastElementChild, { // Buttons
+            }, "-=0.5");
+        }
+
+        // 5. Buttons (안전하게 체크)
+        const buttons = textRef.current?.lastElementChild;
+        if (buttons) {
+            tl.from(buttons, {
                 y: 30,
                 opacity: 0,
                 duration: 1,
                 ease: "power3.out",
             }, "-=0.8");
+        }
 
     }, { scope: containerRef });
 
