@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'fujee.com',
         port: '',
-        pathname: '/uploaded/product/**',
+        pathname: '/uploaded/**',
       },
     ],
   },

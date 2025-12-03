@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { CheckCircle } from "lucide-react";
+import NumberSpinner from "@/components/ui/NumberSpinner";
 
 export default function About() {
     return (
@@ -26,7 +26,9 @@ export default function About() {
                                 오랜 기간 축적된 노하우와 기술력을 바탕으로 고객 여러분께 최적의 육절기 솔루션을 제공하고 있습니다.
                             </p>
                             <p>
-                                <span className="text-neon-cyan font-bold text-deep-black text-lg">35년 이상</span>의 업력과 수많은 현장 레퍼런스를 기반으로,
+                                <span className="text-neon-cyan font-bold text-deep-black text-lg">
+                                    <NumberSpinner value={35} duration={0.5} />년 이상
+                                </span>의 업력과 수많은 현장 레퍼런스를 기반으로,
                                 신제품 판매부터 신속하고 정확한 AS, 합리적인 중고 제품 매입 및 판매까지 전체 여정을 설계합니다.
                             </p>
                         </div>

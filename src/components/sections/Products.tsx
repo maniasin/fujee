@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useRef, useMemo } from "react";
+import { useLenis } from "lenis/react";
+
+import { useState, useRef, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, X, CheckCircle2 } from "lucide-react";
@@ -26,6 +28,7 @@ export default function Products() {
     const [selectedProduct, setSelectedProduct] = useState<ProductModel | null>(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
+    const lenis = useLenis(); // Get lenis instance
 
     // Filter products based on active category
     const displayProducts = useMemo(() => {
@@ -83,6 +86,21 @@ export default function Products() {
         setSelectedProduct(product);
         setSelectedImageIndex(0); // Reset image index when opening new product
     };
+
+    // Prevent body scroll and stop Lenis when modal is open
+    useEffect(() => {
+        if (selectedProduct) {
+            document.body.style.overflow = 'hidden';
+            lenis?.stop(); // Stop Lenis smooth scroll
+        } else {
+            document.body.style.overflow = 'unset';
+            lenis?.start(); // Resume Lenis smooth scroll
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+            lenis?.start(); // Ensure Lenis restarts on unmount
+        };
+    }, [selectedProduct, lenis]);
 
     return (
         <section id="products" className="py-24 bg-deep-black relative" ref={containerRef}>
@@ -195,51 +213,55 @@ export default function Products() {
                             </div>
 
                             {/* Content */}
-                            <div className="flex-1 overflow-y-auto custom-scrollbar">
-                                <div className="flex flex-col lg:flex-row h-full">
+                            <div className="flex-1 overflow-y-auto custom-scrollbar" data-lenis-prevent>
+                                <div className="flex flex-col lg:flex-row min-h-full">
                                     {/* Left: Image Gallery */}
                                     <div className="lg:w-1/2 p-8 bg-white/5 flex flex-col items-center justify-center min-h-[500px] lg:min-h-full gap-6">
                                         {/* Main Image */}
                                         <div className="relative w-full h-[400px] lg:h-[500px]">
                                             <AnimatePresence mode="wait">
-                                                <motion.div
-                                                    key={selectedImageIndex}
-                                                    initial={{ opacity: 0, x: 20 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    exit={{ opacity: 0, x: -20 }}
-                                                    transition={{ duration: 0.3 }}
-                                                    className="relative w-full h-full"
-                                                >
-                                                    <Image
-                                                        src={selectedProduct.images[selectedImageIndex]}
-                                                        alt={selectedProduct.displayName}
-                                                        fill
-                                                        className="object-contain"
-                                                    />
-                                                </motion.div>
+                                                {selectedProduct.images && selectedProduct.images.length > 0 && (
+                                                    <motion.div
+                                                        key={selectedImageIndex}
+                                                        initial={{ opacity: 0, x: 20 }}
+                                                        animate={{ opacity: 1, x: 0 }}
+                                                        exit={{ opacity: 0, x: -20 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        className="relative w-full h-full"
+                                                    >
+                                                        <Image
+                                                            src={selectedProduct.images[selectedImageIndex] || selectedProduct.thumbnail}
+                                                            alt={selectedProduct.displayName}
+                                                            fill
+                                                            className="object-contain"
+                                                        />
+                                                    </motion.div>
+                                                )}
                                             </AnimatePresence>
                                         </div>
 
                                         {/* Thumbnail Strip */}
-                                        <div className="flex gap-3 overflow-x-auto w-full px-2 py-2 justify-center custom-scrollbar">
-                                            {selectedProduct.images.map((img, idx) => (
-                                                <button
-                                                    key={idx}
-                                                    onClick={() => setSelectedImageIndex(idx)}
-                                                    className={`relative w-20 h-20 shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 ${selectedImageIndex === idx
-                                                        ? "border-neon-cyan shadow-[0_0_10px_rgba(0,255,255,0.3)] scale-105"
-                                                        : "border-white/10 hover:border-white/50 opacity-60 hover:opacity-100"
-                                                        }`}
-                                                >
-                                                    <Image
-                                                        src={img}
-                                                        alt={`${selectedProduct.displayName} thumbnail ${idx + 1}`}
-                                                        fill
-                                                        className="object-cover"
-                                                    />
-                                                </button>
-                                            ))}
-                                        </div>
+                                        {selectedProduct.images && selectedProduct.images.length > 1 && (
+                                            <div className="flex gap-3 overflow-x-auto w-full px-2 py-2 justify-start md:justify-center custom-scrollbar">
+                                                {selectedProduct.images.map((img, idx) => (
+                                                    <button
+                                                        key={idx}
+                                                        onClick={() => setSelectedImageIndex(idx)}
+                                                        className={`relative w-20 h-20 shrink-0 rounded-lg overflow-hidden border-2 transition-all duration-200 ${selectedImageIndex === idx
+                                                            ? "border-neon-cyan shadow-[0_0_10px_rgba(0,255,255,0.3)] scale-105"
+                                                            : "border-white/10 hover:border-white/50 opacity-60 hover:opacity-100"
+                                                            }`}
+                                                    >
+                                                        <Image
+                                                            src={img}
+                                                            alt={`${selectedProduct.displayName} thumbnail ${idx + 1}`}
+                                                            fill
+                                                            className="object-cover"
+                                                        />
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Right: Details */}
@@ -254,50 +276,54 @@ export default function Products() {
                                         </div>
 
                                         {/* Features */}
-                                        <div>
-                                            <h4 className="text-lg font-bold text-white mb-4 border-l-4 border-neon-cyan pl-3">주요 특징</h4>
-                                            <ul className="grid grid-cols-1 gap-3">
-                                                {selectedProduct.features.map((feature, idx) => (
-                                                    <li key={idx} className="flex items-start gap-3 text-gray-300">
-                                                        <CheckCircle2 className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" />
-                                                        <span>{feature}</span>
-                                                    </li>
-                                                ))}
-                                            </ul>
-                                        </div>
+                                        {selectedProduct.features && selectedProduct.features.length > 0 && (
+                                            <div>
+                                                <h4 className="text-lg font-bold text-white mb-4 border-l-4 border-neon-cyan pl-3">주요 특징</h4>
+                                                <ul className="grid grid-cols-1 gap-3">
+                                                    {selectedProduct.features.map((feature, idx) => (
+                                                        <li key={idx} className="flex items-start gap-3 text-gray-300">
+                                                            <CheckCircle2 className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" />
+                                                            <span>{feature}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        )}
 
                                         {/* Specs */}
-                                        <div>
-                                            <h4 className="text-lg font-bold text-white mb-4 border-l-4 border-gray-500 pl-3">제품 사양</h4>
-                                            <div className="overflow-hidden rounded-xl border border-white/10">
-                                                <table className="w-full text-sm text-left">
-                                                    <tbody className="divide-y divide-white/10">
-                                                        {Object.entries(selectedProduct.specs).map(([key, value], idx) => (
-                                                            <tr key={key} className={idx % 2 === 0 ? "bg-white/5" : "bg-transparent"}>
-                                                                <th className="py-3 px-4 font-medium text-gray-400 w-1/3">{key}</th>
-                                                                <td className="py-3 px-4 text-white">{value}</td>
-                                                            </tr>
-                                                        ))}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            {selectedProduct.specImage && (
-                                                <div className="mt-4 rounded-xl overflow-hidden border border-white/10 bg-white">
-                                                    <Image
-                                                        src={selectedProduct.specImage}
-                                                        alt={`${selectedProduct.displayName} Specification`}
-                                                        width={800}
-                                                        height={600}
-                                                        className="w-full h-auto"
-                                                    />
+                                        {selectedProduct.specs && (
+                                            <div>
+                                                <h4 className="text-lg font-bold text-white mb-4 border-l-4 border-gray-500 pl-3">제품 사양</h4>
+                                                <div className="overflow-hidden rounded-xl border border-white/10">
+                                                    <table className="w-full text-sm text-left">
+                                                        <tbody className="divide-y divide-white/10">
+                                                            {Object.entries(selectedProduct.specs).map(([key, value], idx) => (
+                                                                <tr key={key} className={idx % 2 === 0 ? "bg-white/5" : "bg-transparent"}>
+                                                                    <th className="py-3 px-4 font-medium text-gray-400 w-1/3">{key}</th>
+                                                                    <td className="py-3 px-4 text-white">{value}</td>
+                                                                </tr>
+                                                            ))}
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                            )}
-                                        </div>
+                                                {selectedProduct.specImage && (
+                                                    <div className="mt-4 rounded-xl overflow-hidden border border-white/10 bg-white">
+                                                        <Image
+                                                            src={selectedProduct.specImage}
+                                                            alt={`${selectedProduct.displayName} Specification`}
+                                                            width={800}
+                                                            height={600}
+                                                            className="w-full h-auto"
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
 
                                         {/* CTA */}
                                         <div className="pt-6">
                                             <Link
-                                                href="#contact"
+                                                href={`/?inquiry=${encodeURIComponent(selectedProduct.displayName)}#contact`}
                                                 onClick={() => setSelectedProduct(null)}
                                                 className="inline-flex items-center justify-center w-full py-4 bg-neon-purple hover:bg-neon-cyan text-white hover:text-deep-black font-bold rounded-xl transition-all duration-300"
                                             >
